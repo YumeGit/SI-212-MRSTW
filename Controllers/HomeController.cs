@@ -14,7 +14,8 @@ namespace WEB_Project.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(db.Lessons.Where(x => x.Name == "CDE").ToList() );
+            //return View(db.Lessons.Where(x => x.Name == "CDE").ToList() );
+            return View(db.Lessons.ToList() ); ;
         }
 
         public ActionResult Rjaka(int? id)
