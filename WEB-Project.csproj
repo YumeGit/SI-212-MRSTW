@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\LessonContext.cs" />
+    <Compile Include="Models\LessonDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

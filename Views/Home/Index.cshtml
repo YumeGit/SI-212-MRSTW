@@ -1,8 +1,30 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    //Layout = null;
 }
 
-<h2>Index</h2>
+@*@model System.Data.Entity.DbSet<WEB_Project.Models.Lesson>*@
+@model List<WEB_Project.Models.Lesson>
 
-<p> Hello world!</p>
+<h3>Пары:</h3>
+<table border="1" width="50%" style="text-align: center;">
+    <tr>
+        <td><p>Название</p></td>
+        <td><p>Начало</p></td>
+        <td><p>Конец</p></td>
+        <td></td>
+    </tr>
+
+    @foreach (var b in Model)
+    {
+        <tr>
+            <td><p>@b.Name</p></td>
+            <td><p>@string.Format("{0:D2}:{1:D2}", b.TimeStartHour, b.TimeStartMinute)</p></td>
+            <td><p>@string.Format("{0:D2}:{1:D2}", b.TimeFinishHour, b.TimeFinishMinute)</p></td>
+            <td><p>помогите</p></td>
+        </tr>
+    }
+</table>
+
+<br />

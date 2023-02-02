@@ -12,13 +12,28 @@ namespace WEB_Project.Models
         Sem,
     }
 
+    public enum Week
+    {
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Sunday,
+        Sunday1,
+    }
+
     public class Lesson
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int NameId { get; set; }
         public LessonType Type { get; set; }
-        public (int hour, int minute) TimeStart { get; set; }
-        public (int hour, int minute) TimeFinish { get; set; }
+        public int TimeStartHour { get; set; }
+        public int TimeStartMinute { get; set; }
+        public int TimeFinishHour { get; set; }
+        public int TimeFinishMinute { get; set;}
+        public Week Day { get; set; }
     }
 }
