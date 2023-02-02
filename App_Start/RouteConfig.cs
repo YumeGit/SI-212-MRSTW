@@ -17,7 +17,7 @@ namespace WEB_Project
                 name: "AutoRedirect",
                 url: "",
                 defaults: new { controller = "Home", action = "StartRedirect" }
-            ); ;
+            );
 
             routes.MapRoute(
                 name: "Default",
