@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Rjaka";
+    var ints = new int[] { 1, 2, 3, 4, 5 };
+}
+@model WEB_Project.Controllers.ViewModel
+
+<h2>Rjaka: @Model.TestData</h2>
+
+@foreach(var i in ints) 
+{ 
+    <p>@i</p>
+}
