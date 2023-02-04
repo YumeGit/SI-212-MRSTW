@@ -10,7 +10,7 @@ namespace MRSTW.Database
 	{
 		protected override void Seed(ScheduleDbContext context)
 		{
-			context.Users.Add(new Models.User { Id = 2, Name = "Cringe" });
+			context.Users.Add(new Models.User { Id = 1, Name = "Cringe" });
 			base.Seed(context);
 		}
 	}

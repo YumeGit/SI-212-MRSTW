@@ -1,4 +1,6 @@
-﻿@{
+﻿@model MRSTW.Models.UserLoginData
+
+@{
     Layout = "";
 }
 
@@ -11,20 +13,20 @@
     <title>Registration page</title>
 </head>
 <body>
-    <form action="">
+    @using (Html.BeginForm("Auth", "Register"))
+    {
         <h1 title="Please, fill in all the empty fields">Registration</h1>
         <div class="group">
             <b><label for=""> Login: </label> </b>
-            <input type="text" required>
+            @Html.TextBoxFor(x => x.Login)
         </div>
 
         <div class="group">
             <b>  <label for=""> Password: </label> </b>
-            <input type="password" required>
+            @Html.TextBoxFor(x => x.Password, new { placeholder = "Password..." })
         </div>
         <div class="group">
             <b> <label for=""> Repeat Password: </label> </b>
-            <input type="password" required>
         </div>
         <div class="group">
             <b><label for=""> Email: </label> </b>
@@ -36,6 +38,6 @@
         <div class="group">
             <a href=" /auth/Login"> Already have an account? Login</a>
         </div>
-    </form>
+    }
 </body>
 </html>

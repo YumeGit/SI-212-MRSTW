@@ -9,11 +9,7 @@ namespace MRSTW.Controllers
 		public ActionResult Login()
 		{
 			var c = new ScheduleDbContext();
-			var a = c.Users.Take(2);
-			foreach(var b in a)
-			{
-				b.Name = b.Name;
-			}
+			var u = c.Users.Take(2);
 			return View();
 		}
 
