@@ -7,9 +7,9 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
-using WEB_Project.Models;
+using WEB.Models;
 
-namespace WEB_Project
+namespace WEB
 {
     public class Global : HttpApplication
     {

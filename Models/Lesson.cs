@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WEB_Project.Models
+namespace WEB.Models
 {
     public enum LessonType
     {
@@ -35,5 +35,7 @@ namespace WEB_Project.Models
         public int TimeFinishHour { get; set; }
         public int TimeFinishMinute { get; set;}
         public Week Day { get; set; }
+
     }
+
 }

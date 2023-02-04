@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace WEB_Project.Models
+namespace WEB.Models
 {
     public class LessonContext : DbContext
     {
