@@ -9,7 +9,6 @@
 *.dll.config
 *.cache
 *.suo
-/[Aa]pp_[Dd]ata/
 # Include dlls if they’re in the NuGet packages directory
 !/packages/*/lib/*.dll
 !/packages/*/lib/*/*.dll
@@ -76,3 +75,4 @@ _[Ss]cripts
 *.dot[Cc]over
 .vs
 *.mdf
+*.ldf
