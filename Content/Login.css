@@ -1,19 +1,20 @@
 body {
-    background: url("https://i.ytimg.com/vi/jerPX0MS6Wk/maxresdefault.jpg");
+    background: url("https://www.next-portal.ru/upload/210/4ee3dde5d903904c78a6d50db03d7645.jpg");
     background-size: contain;
+    background-repeat:no-repeat;
     font-family: Tahoma, serif;
-    margin: 0 ;
+    margin: 0;
 }
 h1{
     cursor: help;
     margin: 0;
     text-transform: uppercase;
     padding-bottom: 5px;
-    border-bottom: 3px solid#5200a5;
+    border-bottom: 3px solid #5200a5;
 }
 form{
     margin: 200px auto;
-    background: rgba(0,186,225,0.77 );
+    background: rgba(0,186,225,1 );
     width: 450px;
     height: 350px;
     padding: 20px;
@@ -51,7 +52,8 @@ button {
     height: 55px;
     background: none;
     color: #fff;
-    background: #5200a5;
+    background: #f562f296;
+    opacity 20%;
     border: none;
     text-transform: uppercase;
     font-size: 15px;
