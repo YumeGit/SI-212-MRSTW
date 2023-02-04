@@ -1,11 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    //Layout = null;
 }
-
-@*@model System.Data.Entity.DbSet<WEB.Models.Lesson>*@
-@model List<WEB.Models.Lesson>
 
 <h3>Пары:</h3>
 <table border="1" width="50%" style="text-align: center;">
@@ -15,16 +11,6 @@
         <td><p>Конец</p></td>
         <td></td>
     </tr>
-
-    @foreach (var b in Model)
-    {
-        <tr>
-            <td><p>@b.Name</p></td>
-            <td><p>@string.Format("{0:D2}:{1:D2}", b.TimeStartHour, b.TimeStartMinute)</p></td>
-            <td><p>@string.Format("{0:D2}:{1:D2}", b.TimeFinishHour, b.TimeFinishMinute)</p></td>
-            <td><p>помогите</p></td>
-        </tr>
-    }
 </table>
 
 <br />
