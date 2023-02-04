@@ -8,6 +8,10 @@ namespace MRSTW.Database
 	/// </summary>
 	public class ScheduleDbContext : DbContext
 	{
+		public ScheduleDbContext() : base("ScheduleDbContext")
+		{
+		}
+
 		public DbSet<User> Users { get; set; }
 	}
 }
