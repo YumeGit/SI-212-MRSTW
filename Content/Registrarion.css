@@ -9,10 +9,10 @@ h1{
     margin: 0;
     text-transform: uppercase;
     padding-bottom: 5px;
-    border-bottom: 3px solid#5200a5;
+    border-bottom: 3px solid #5200a5;
 }
 form{
-    margin: 0 auto;
+    margin: 200px auto;
     background: rgba(0,186,225,0.77 );
     width: 450px;
     padding: 20px;

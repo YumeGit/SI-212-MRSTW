@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f1d3cd12-c9a3-4819-8d68-929c8edc0455" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Registrarion.css" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Registrarion.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MRSTW.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MRSTW.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/Auth/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Auth/Login.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/Auth/Register.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Auth/Register.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +27,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/uzets/Documents/GitHub/WEB-Project",
+    "last_opened_file_path": "C:/Users/uzets/OneDrive/Рабочий стол/Kursach",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -42,6 +40,8 @@
       <option name="presentableId" value="Default" />
       <updated>1675496211457</updated>
       <workItem from="1675496212740" duration="1600000" />
+      <workItem from="1675591485068" duration="53000" />
+      <workItem from="1675591603450" duration="9000" />
     </task>
     <servers />
   </component>
