@@ -1,74 +1,43 @@
-﻿@model MRSTW.Models.UserLoginData
+﻿@model MRSTW.Models.View.RegisterForm
 
 @{
-    Layout = "";
+    ViewBag.Title = "Sign Up";
 }
 
-<!-- Сюда Регистрацию -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script>
-        function checkPassword(form) {
-            const password1 = form.Password.value;
-            const password2 = form.PasswordRepeat.value;
-
-            // If password not entered
-            if (password1 == '')
-                alert ("Please enter Password");
-
-            // If confirm password not entered
-            else if (password2 == '')
-                alert ("Please enter confirm password");
-
-            // If Not same return False.
-            else if (password1 != password2) {
-                alert ("\nPassword did not match: Please try again...")
-                return false;
-            }
-
-            // If same return True.
-            else{
-                alert("Password Match: Welcome!")
-                return true;
-            }
-        }
-    </script>
+@section Styles
+{
     <link rel="stylesheet" href="~/Content/Registrarion.css">
-    <meta charset="UTF-8">
-    <title>Registration page</title>
-</head>
-<body>
-    @using (Html.BeginForm("Auth", "Register", FormMethod.Post, new {onsubmit = "return checkPassword(this)" }))
-    {
-        <h1 title="Please, fill in all the empty fields">Registration</h1>
-        <div class="group">
-            <b><label for=""> Login: </label> </b>
-            @Html.TextBoxFor(x => x.Login, new { placeholder = "Login..." })
-        </div>
+}
 
-        <div class="group">
-            <label for=""> 
-                <b>Password:</b> 
-             </label> 
-            @Html.PasswordFor(x => x.Password, new { placeholder = "Password..." })
-        </div>
-        <div class="group">
-             <label for="">
-            <b> Repeat Password:</b>
-             </label> 
-            @Html.Password("PasswordRepeat")
-        </div>
-        <div class="group">
-            <b><label for=""> Email: </label> </b>
-            <input type="email" required>
-        </div>
-        <div class="group button_container">
-            <b> <button> Sign up </button></b>
-        </div>
-        <div class="group">
-            <a href=" /auth/Login"> Already have an account? Sign in</a>
-        </div>
-    }
-</body>
-</html>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h1 title="Please, fill in all the empty fields">Registration</h1>
+    <div class="group">
+        @Html.LabelFor(x => x.Email)
+        @Html.EditorFor(x => x.Email)
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+    <div class="group">
+        @Html.LabelFor(x => x.Name)
+        @Html.EditorFor(x => x.Name)
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+    <div class="group">
+        @Html.LabelFor(x => x.Password)
+        @Html.PasswordFor(x => x.Password)
+        @Html.ValidationMessageFor(x => x.Password)
+    </div>
+    <div class="group">
+        @Html.LabelFor(x => x.PasswordConfirm)
+        @Html.PasswordFor(x => x.PasswordConfirm)
+        @Html.ValidationMessageFor(x => x.PasswordConfirm)
+    </div>
+    <div class="group button_container">
+        <b><button> Sign Up </button></b>
+    </div>
+    <div class="group">
+        @Html.ActionLink("Already have an account?", "Login")
+    </div>
+}

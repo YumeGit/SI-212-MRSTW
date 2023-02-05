@@ -108,15 +108,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Database\ScheduleDbContext.cs" />
     <Compile Include="Database\ScheduleDbInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Lesson.cs" />
-    <Compile Include="Models\LessonContext.cs" />
-    <Compile Include="Models\UserLoginData.cs" />
+    <Compile Include="Models\ScheduleElement.cs" />
+    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\View\LoginForm.cs" />
+    <Compile Include="Models\View\RegisterForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +129,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

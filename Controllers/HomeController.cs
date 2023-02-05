@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using MRSTW.Database;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace MRSTW
 {
@@ -6,7 +8,9 @@ namespace MRSTW
 	{
 		public ActionResult Index()
 		{
-			return View();
+			var ctx = new ScheduleDbContext();
+			var users = ctx.Users.ToList();
+			return View(users);
 		}
 	}
 }

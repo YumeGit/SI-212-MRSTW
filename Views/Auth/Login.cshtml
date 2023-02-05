@@ -1,34 +1,39 @@
-﻿
-@{
-    ViewBag.Title = "Login";
-    Layout = "";
-}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="~/Content/Login.css">
-    <meta charset="UTF-8">
-    <title>Login page</title>
-</head>
-<body>
-    <form action="">
-        <h1 title="Please, fill in all the blank fields">Login</h1>
-        <div class="group">
-            <strong> <label for=" ">Login:</label> </strong>
-            <input type="text" required >
-        </div>
-        <div class="group">
-            <strong><label for=" "> Password: </label></strong>
-            <input type="password" required>
-        </div>
-        <div class="group button_container">
-            <button> Sign in </button>
-        </div>
-        <div class = "group"> <a href=" https://www.youtube.com"> Forgot password?</a>
-        </div>
-        <div class = "group"> <a href="/Auth/Register"> Register an account now</a>
-        </div>
-    </form>
-</body>
-</html>
+﻿@model MRSTW.Models.View.LoginForm
 
+@{
+    ViewBag.Title = "Sign In";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/Content/Login.css">
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h1 title="Please, fill in all the blank fields">Login</h1>
+    <div class="group">
+        @Html.LabelFor(x => x.Email)
+        @Html.TextBoxFor(x => x.Email, new { @type = "email" })
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+    <div class="group">
+        @Html.LabelFor(x => x.Password)
+        @Html.PasswordFor(x => x.Password)
+        @Html.ValidationMessageFor(x => x.Password)
+    </div>
+
+    <div class="group button_container">
+        <button> Sign in </button>
+    </div>
+
+    <div class="group">
+        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+    </div>
+
+    <div class="group">
+        @Html.ActionLink("Create an account", "Register")
+    </div>
+}
