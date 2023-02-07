@@ -1,0 +1,13 @@
+<div class="page">
+  <div class="header">
+    <div class="left">
+      <p class="my-favourite-blog">My Favourite Blog</p>
+    </div>
+    <div class="right">
+      <div class="button1"><p class="vhod">Вход</p></div>
+      <div class="button1">
+        <p class="vhod">Регистрация</p>
+      </div>
+    </div>
+  </div>
+</div>
