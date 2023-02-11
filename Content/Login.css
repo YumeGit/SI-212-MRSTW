@@ -11,14 +11,16 @@ h1{
     padding-bottom: 5px;
     border-bottom: 3px solid #5200a5;
 }
-form{
+form {
+    font-family: "Itim", serif;
     margin: 200px auto;
     background: rgba(0,186,225,1 );
     width: 450px;
     padding: 20px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.82);
 }
-.group{
+.group {
+    font-family: "Inter", serif;
     text-align: center;
     margin: 10px;
     padding: 5px;
