@@ -45,13 +45,15 @@ input:focus{
     transform: translateX(15px);
     width: 385px;
 }
-button{
+button {
+    transition: all .2s ease;
     cursor: pointer;
-    padding:10px 30px;
+    padding: 10px 30px;
     height: 55px;
     background: none;
     color: #fff;
     background: #5200a5;
+    opacity: 65%;
     border: none;
     text-transform: uppercase;
     font-size: 15px;
