@@ -98,9 +98,13 @@
     <Content Include="App_Data\MRSTW1_log.ldf">
       <DependentUpon>MRSTW1.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\Home.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\Registrarion.css" />
+    <Content Include="Content\О-нас.css" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Auth\Home.html" />
+    <Content Include="Views\Auth\О-нас.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
