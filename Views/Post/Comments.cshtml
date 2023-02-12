@@ -1,0 +1,35 @@
+﻿@model MRSTW.Models.Post
+@{
+    ViewBag.Title = $"{Model.Name} - Comments";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/Content/styles/Post.css" />
+}
+
+<div class="container">
+    <div class="breadcrumb">
+        @Html.ActionLink($"← Home", "", "") &lt;
+        @Html.ActionLink(Model.Name, "View", new { @id = Model.Id })
+    </div>
+
+    <div>
+        <div class="comments_editor">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.Label("Leave a Comment")
+                @Html.TextArea("message")
+                <button>Submit</button>
+                @Html.ValidationMessage("message")
+            }
+        </div>
+
+        @foreach(var comment in Model.Comments)
+        {
+            @Html.Partial("_Comment", comment)
+        }
+    </div>
+</div>

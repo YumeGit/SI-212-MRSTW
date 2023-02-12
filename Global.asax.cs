@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace MRSTW
@@ -11,7 +12,8 @@ namespace MRSTW
         {
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-        }
+			AppConfig.RegisterRoutes(RouteTable.Routes);
+			AppConfig.RegisterBundles(BundleTable.Bundles);
+		}
     }
 }

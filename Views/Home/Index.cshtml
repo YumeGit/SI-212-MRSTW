@@ -1,14 +1,16 @@
-﻿
+﻿@model List<MRSTW.Models.Post>
 @{
     ViewBag.Title = "Index";
 }
 
-<h3>Пары:</h3>
-<table border="1" width="50%" style="text-align: center;">
-    <tr>
-        <td><p>Название</p></td>
-        <td><p>Начало</p></td>
-        <td><p>Конец</p></td>
-        <td></td>
-    </tr>
-</table>
+@section Styles 
+{
+    <link rel="stylesheet" href="~/Content/styles/Post.css" />
+}
+
+<div class="container">
+    @foreach (var post in Model)
+    {
+        @Html.Partial("_ShortPost", post)
+    }
+</div>

@@ -1,4 +1,6 @@
-﻿namespace MRSTW.Models
+﻿using System.Collections.Generic;
+
+namespace MRSTW.Models
 {
 	public class User
 	{

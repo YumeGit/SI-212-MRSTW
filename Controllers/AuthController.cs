@@ -14,12 +14,7 @@ namespace MRSTW.Controllers
 		}
 
 		// POST: /Auth/Login
-		// Этот аттрибут определяет этот метод как экшн для ПОСТ запросов на адрес. 
-		// ПОСТ запросы нужны для отправки данных на сервер с форм. 
 		[HttpPost]
-		// Этот аттрибут добавляет проверку от фабрикации запроса. Он удостоверяет, что запрос
-		// был произведен именно с формы на нашем сайте. Если ты добавляешь этот аттрибут, шаблон формы
-		// должен иметь @Html.AntiForgeryToken() внутри себя.
 		[ValidateAntiForgeryToken]
 		public ActionResult Login(LoginForm form)
 		{
@@ -34,7 +29,7 @@ namespace MRSTW.Controllers
 				// база данных была автоматически отключена. Грубо говоря, аналог этой
 				// штуки в C++ это сделать new ScheduleDbContext() до выполнения блока
 				// и delete после выполнения.
-				using (var db = new ScheduleDbContext())
+				using (var db = new BlogDbContext())
 				{
 					// Из коллекции пользователей в нашей базе данных
 					var user = db.Users
@@ -72,11 +67,13 @@ namespace MRSTW.Controllers
 			return View(form);
 		}
 
+		// GET: /Auth/Register
 		public ActionResult Register()
 		{
 			return View();
 		}
 
+		// POST: /Auth/Register
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Register(RegisterForm vm)

@@ -1,0 +1,31 @@
+﻿@model MRSTW.Models.Post
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/Content/styles/Post.css" />
+}
+
+<div class="container">
+    <div>
+        <small>
+            @Html.ActionLink($"← Home", "", "")
+        </small>
+    </div>
+    <h1>@Model.Name</h1>
+    <div>
+        <small>
+            Опубликован: @Model.Created.ToShortDateString() -
+            Автор: @Model.Author.Name
+        </small>
+    </div>
+    <p>
+        @Model.FullStory
+    </p>
+    <div>
+        @Html.ActionLink($">> View {Model.Comments.Count} Comments >>", "Comments", new { id = Model.Id })
+    </div>
+</div>
