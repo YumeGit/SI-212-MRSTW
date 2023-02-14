@@ -131,6 +131,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Database\BlogDbContext.cs" />
     <Compile Include="Database\BlogDbInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -152,17 +153,19 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Home\_ShortPost.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Post\Details.cshtml" />
+    <Content Include="Views\Post\_Comment.cshtml" />
+    <Content Include="Views\Post\Comments.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Home\_ShortPost.cshtml" />
-    <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Post\View.cshtml" />
-    <Content Include="Views\Post\_Comment.cshtml" />
-    <Content Include="Views\Post\Comments.cshtml" />
+    <Content Include="Views\Post\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

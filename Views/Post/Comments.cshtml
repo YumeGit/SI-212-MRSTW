@@ -8,28 +8,37 @@
     <link rel="stylesheet" href="~/Content/styles/Post.css" />
 }
 
-<div class="container">
-    <div class="breadcrumb">
-        @Html.ActionLink($"← Home", "", "") &lt;
-        @Html.ActionLink(Model.Name, "View", new { @id = Model.Id })
-    </div>
+@section Breadcrumb
+{
+    &larr; @Html.ActionLink(Model.Name, "Details", new { @id = Model.Id })
+    &larr; Comments
+}
 
-    <div>
-        <div class="comments_editor">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-
-                @Html.Label("Leave a Comment")
-                @Html.TextArea("message")
-                <button>Submit</button>
-                @Html.ValidationMessage("message")
-            }
-        </div>
-
-        @foreach(var comment in Model.Comments)
+<div>
+    <div class="comments_editor">
+        @using (Html.BeginForm())
         {
-            @Html.Partial("_Comment", comment)
+            @Html.AntiForgeryToken()
+
+            <div>
+                @Html.ValidationSummary(true)
+                @Html.Hidden("Id")
+            </div>
+
+            <div>
+                @Html.Label("Leave a Comment")
+                @Html.TextBox("Message")
+                @Html.ValidationMessage("message")
+            </div>
+
+            <div>
+                <button>Submit</button>
+            </div>
         }
     </div>
+
+    @foreach (var comment in Model.Comments)
+    {
+        @Html.Partial("_Comment", comment)
+    }
 </div>

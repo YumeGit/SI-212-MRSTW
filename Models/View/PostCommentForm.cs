@@ -4,7 +4,7 @@ namespace MRSTW.Models.View
 {
 	public class PostCommentForm
 	{
-		[Required]
-		public string Message { get; set; }
+		[Required] public int Id { get; set; }
+		[Required] public string Message { get; set; }
 	}
 }

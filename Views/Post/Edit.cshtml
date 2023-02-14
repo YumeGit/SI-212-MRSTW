@@ -1,0 +1,42 @@
+﻿@model MRSTW.Models.Post
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/Content/Styles/Post.css" />
+}
+
+@section Breadcrumb
+{
+    &larr; @Html.ActionLink(Model.Name, "Details", new { @id = Model.Id })
+    &larr; Edit
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Story)
+        @Html.TextAreaFor(model => model.Story, new { @class = "edit_story" })
+        @Html.ValidationMessageFor(model => model.Story)
+    </div>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}

@@ -3,14 +3,12 @@
     ViewBag.Title = "Index";
 }
 
-@section Styles 
+@section Styles
 {
     <link rel="stylesheet" href="~/Content/styles/Post.css" />
 }
 
-<div class="container">
-    @foreach (var post in Model)
-    {
-        @Html.Partial("_ShortPost", post)
-    }
-</div>
+@foreach (var post in Model)
+{
+    @Html.Partial("_ShortPost", post)
+}

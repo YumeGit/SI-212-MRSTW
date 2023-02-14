@@ -1,7 +1,7 @@
 ﻿@model MRSTW.Models.Post
 
 <div class="post">
-    <h2>@Html.ActionLink(Model.Name, "View", "Post", new { id = Model.Id }, new { })</h2>
+    <h2>@Html.ActionLink(Model.Name, "Details", "Post", new { id = Model.Id }, new { })</h2>
     <div>
         <small>
             Опубликован: @Model.Created.ToShortDateString() -
@@ -14,11 +14,11 @@
             <a href="@Url.Action("Delete", "Post", new { id = Model.Id })">[Удалить]</a>
         </small>
     </div>
-    <p class="content">
-        @Model.ShortStory
+    <p class="post_content">
+        @(string.Join(" ", Model.Story.Split(' ').Take(50)))...
     </p>
     <div>
-        <a href="@Url.Action("View", "Post", new { id = Model.Id })">View More →</a>
+        <a href="@Url.Action("Details", "Post", new { id = Model.Id })">View More →</a>
     </div>
 </div>
 

@@ -20,8 +20,14 @@
 <body>
     @Html.Partial("_Header")
 
-    <div class="content">
-        @RenderBody()
+    <div class="container">
+        <div class="breadcrumb">
+            @Html.ActionLink("Home", "", "")
+            @RenderSection("Breadcrumb", false)
+        </div>
+        <div class="page">
+            @RenderBody()
+        </div>
     </div>
 
     @Html.Partial("_Footer")
