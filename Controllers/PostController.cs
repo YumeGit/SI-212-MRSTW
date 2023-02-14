@@ -18,7 +18,7 @@ namespace MRSTW.Controllers
 				var post = ctx.Posts
 					.Include(x => x.Author)
 					.Include(x => x.Comments)
-					.FirstOrDefault();
+					.First(x => x.Id == id);
 
 				post.Views++;
 				ctx.SaveChanges();
@@ -34,7 +34,7 @@ namespace MRSTW.Controllers
 				var post = ctx.Posts
 					.Include(parent => parent.Comments)
 					.Include(x => x.Author)
-					.FirstOrDefault();
+					.First(x => x.Id == id);
 
 				post.Comments = post.Comments
 					.OrderByDescending(x => x.Created)
@@ -46,13 +46,13 @@ namespace MRSTW.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Comments(PostCommentForm form)
+		public ActionResult Comments(int id, PostCommentForm form)
 		{
 			using (var ctx = new BlogDbContext())
 			{
 				var post = ctx.Posts
 					.Include(x => x.Comments.Select(y => y.Author))
-					.FirstOrDefault();
+					.First(x => x.Id == id);
 
 				// Create a new comment
 				if (ModelState.IsValid)
