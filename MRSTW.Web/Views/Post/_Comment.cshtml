@@ -1,0 +1,9 @@
+﻿@model MRSTW.Web.Models.Comment
+
+<div class="comment">
+    <div class="title">
+        @Model.Author.Name
+        <span>at @Model.Created.ToShortDateString() @Model.Created.ToShortTimeString()</span>
+    </div>
+    <div class="message">@Model.Message</div>
+</div>

@@ -1,0 +1,121 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+
+a {
+    color: #478ac9;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.page {
+    min-height: 300px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex.centered {
+    justify-content: center;
+}
+
+.breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+
+/* Header */
+
+header {
+    width: 100%;
+    padding: 40px 0;
+    background-image: linear-gradient(#478ac9, #b9c1cc);
+    box-sizing: border-box;
+    margin-bottom: 40px;
+}
+
+header .logotype {
+    text-align: center;
+    font-family: "Itim", sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+
+header nav ul {
+}
+
+header nav li {
+    list-style: none;
+    padding: 5px 0 10px;
+    margin: 0 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    position :relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+header nav li a {
+    color: unset;
+}
+
+header nav li::after {
+    content: "";
+    height: 3px;
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+header nav li:hover {
+    color: white;
+}
+
+header nav li:hover::after {
+    background-color: white;
+}
+
+/* Footer */
+
+footer {
+    margin-top: 40px;
+    width: 100%;
+    background-color: #333;
+    padding: 100px 0;
+    text-align: center;
+    color: white;
+}
+
+input,
+textarea,
+select {
+    display: block;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+button,
+input[type=submit] {
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+}
+
+td, th {
+    padding: 5px 10px;
+}

@@ -1,0 +1,53 @@
+﻿@model MRSTW.Web.Models.User
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section Breadcrumb
+{
+    &larr; @Html.ActionLink("View All Users", "Index", "Users")
+    &larr; Edit User
+}
+
+<h2>Edit User</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div>
+        @Html.LabelFor(model => model.Email)
+        @Html.EditorFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password)
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Role)
+        @Html.DropDownListFor(model => model.Role,
+         new SelectList(Enum.GetValues(typeof(MRSTW.Web.Models.UserRole))),
+         "Select Role")
+        @Html.ValidationMessageFor(model => model.Role)
+    </div>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

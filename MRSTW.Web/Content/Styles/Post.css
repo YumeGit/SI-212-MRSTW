@@ -1,0 +1,60 @@
+﻿.post {
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.post_content {
+    white-space: pre-line;
+    margin-bottom: 10px;
+}
+
+.comment {
+    margin-top: 10px;
+    background-color: #F0F0F0;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+.comment .title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.comment .title span {
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.comments_editor {
+    background-color: #F0F0F0;
+    padding: 10px 20px;
+}
+
+
+.edit_story {
+    width: 100%;
+    resize: vertical;
+    box-sizing: border-box;
+    min-height: 300px;
+}
+
+.react_container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.react {
+    padding: 3px 10px;
+    background: #EEE;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.react {
+    padding: 3px 10px;
+    background: #EEE;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}

@@ -1,0 +1,54 @@
+﻿@model MRSTW.Web.Models.Post
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/Content/styles/Post.css" />
+}
+
+@section Breadcrumb
+{
+    &larr; @Model.Name
+}
+
+<h1>@Model.Name</h1>
+<div>
+    <small>
+        Опубликован: @Model.Created.ToShortDateString() -
+        Автор: @Model.Author.Name -
+        Просмотров: @Model.Views
+    </small>
+</div>
+
+<div>
+    <small>
+
+        <a href="@Url.Action("Edit", "Post", new { id = Model.Id })">[Редактировать]</a>
+        <a href="/Post/Edit/@Model.Id">[Редактировать]</a>
+
+        <a href="@Url.Action("Delete", "Post", new { id = Model.Id })">[Удалить]</a>
+    </small>
+</div>
+
+<div class="post_content">
+    @Model.Story
+</div>
+
+<div class="react_container">
+    <div class="react">
+        🥤 123
+    </div>
+    <div class="react">
+        👎 123
+    </div>
+    <div class="react">
+        🐵 123
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink($"[ {Model.Comments.Count} Comments ]", "Comments", new { id = Model.Id })
+</div>

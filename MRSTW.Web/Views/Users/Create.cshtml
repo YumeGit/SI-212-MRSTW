@@ -1,0 +1,40 @@
+﻿@model MRSTW.Web.Models.User
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@section Breadcrumb
+{
+    &larr; @Html.ActionLink("View All Users", "Index", "Users")
+    &larr; Create
+}
+
+<h1>Create a new User</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.LabelFor(model => model.Email)
+        @Html.EditorFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Password)
+        @Html.EditorFor(model => model.Password)
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div>
+        <input type="submit" value="Create" />
+    </div>
+}
