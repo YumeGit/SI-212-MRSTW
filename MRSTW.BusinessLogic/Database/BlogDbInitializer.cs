@@ -1,7 +1,7 @@
-﻿using MRSTW.Web.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using MRSTW.Domain.Entities;
 
 namespace MRSTW.BusinessLogic.Database
 {

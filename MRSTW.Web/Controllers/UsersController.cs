@@ -1,13 +1,10 @@
-﻿using MRSTW.BusinessLogic.Database;
-using MRSTW.Domain;
-using System.Data.Entity;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
-	public class UsersController : Controller
+    public class UsersController : Controller
     {
+#if false
         private BlogDbContext db = new BlogDbContext();
 
         // GET: Users
@@ -109,5 +106,6 @@ namespace MRSTW.Web.Controllers
             }
             base.Dispose(disposing);
         }
+#endif
     }
 }

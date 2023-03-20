@@ -1,6 +1,4 @@
-﻿using MRSTW.Web.Database;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 
 namespace MRSTW.Web

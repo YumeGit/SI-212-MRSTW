@@ -2,8 +2,8 @@
 
 namespace MRSTW.BusinessLogic
 {
-    public interface ISession
-    {
-        RequestResponseAction UserLogin(LoginData data);
-    }
+	public interface ISession
+	{
+		RequestResponseAction UserLogin(ULoginData data);
+	}
 }

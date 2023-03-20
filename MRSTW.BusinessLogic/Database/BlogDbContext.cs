@@ -1,4 +1,4 @@
-﻿using MRSTW.Domain;
+﻿using MRSTW.Domain.Entities;
 using System.Data.Entity;
 
 namespace MRSTW.BusinessLogic.Database

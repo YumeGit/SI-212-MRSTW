@@ -1,14 +1,11 @@
-﻿using MRSTW.Domain;
-using MRSTW.Web.Models.View;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
-using MRSTW.BusinessLogic.Database;
 
 namespace MRSTW.Web.Controllers
 {
 	public class PostController : Controller
 	{
+#if false
 		BlogDbContext DbContext { get; set; } = new BlogDbContext();
 
 		public ActionResult Details(int? id)
@@ -139,5 +136,6 @@ namespace MRSTW.Web.Controllers
 
             base.Dispose(disposing);
         }
+#endif
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace MRSTW.Domain
+﻿namespace MRSTW.Domain.Entities
 {
 	public enum UserRole
 	{

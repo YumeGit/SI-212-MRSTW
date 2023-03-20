@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MRSTW.Domain
+namespace MRSTW.Domain.Entities
 {
 	public class Comment
 	{

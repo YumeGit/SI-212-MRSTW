@@ -1,6 +1,5 @@
 ﻿using MRSTW.BusinessLogic.Database;
 using MRSTW.Domain;
-using MRSTW.Web.Models.View;
 using System;
 using System.Web.Mvc;
 
@@ -26,7 +25,7 @@ namespace MRSTW.Web.Controllers
 		// POST: /Auth/Login
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Login(LoginForm form)
+		public ActionResult Login(LoginF form)
 		{
 			if(ModelState.IsValid)
 			{
