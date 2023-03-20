@@ -18,6 +18,7 @@ namespace MRSTW.Web.Controllers
 			var post = DbContext.Posts
 				.Include(x => x.Author)
 				.Include(x => x.Comments)
+				.Include(x => x.Reactions.Select(y => y.User))
 				.First(x => x.Id == id);
 
 			// If we didn't find a post - bail.
@@ -38,7 +39,8 @@ namespace MRSTW.Web.Controllers
 			// Fetch the post entry 
 			var post = DbContext.Posts
 				.Include(x => x.Comments.Select(y => y.Author))
-				.First(x => x.Id == id);
+                .Include(x => x.Comments.Select(y => y.Reactions))
+                .First(x => x.Id == id);
 
 			// Sort comments by their creation date.
 			post.Comments = post.Comments
@@ -53,11 +55,12 @@ namespace MRSTW.Web.Controllers
 		public ActionResult Comments(PostCommentForm form)
         {
             var post = DbContext.Posts
-				.Include(x => x.Comments.Select(y => y.Author))
-				.First(x => x.Id == form.Id);
+                .Include(x => x.Comments.Select(y => y.Author))
+                .Include(x => x.Comments.Select(y => y.Reactions))
+                .First(x => x.Id == form.Id);
 
-			// Post was not found.
-			if (post == null)
+            // Post was not found.
+            if (post == null)
 				return HttpNotFound();
 
 			// Create a new comment

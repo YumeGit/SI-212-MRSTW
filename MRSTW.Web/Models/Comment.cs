@@ -9,5 +9,6 @@ namespace MRSTW.Web.Models
 		public string Message { get; set; }
 		public User Author { get; set; }
 		public DateTime Created { get; set; } = DateTime.Now;
+		public ICollection<UserReaction> Reactions { get; set; }
 	}
 }

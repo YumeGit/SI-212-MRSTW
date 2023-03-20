@@ -8,5 +8,6 @@ namespace MRSTW.Web.Database
 		public DbSet<User> Users { get; set; }
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Comment> Comments { get; set; }
+		public DbSet<UserReaction> Reactions { get; set; }
 	}
 }

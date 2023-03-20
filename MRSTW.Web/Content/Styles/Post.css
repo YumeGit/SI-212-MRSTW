@@ -43,6 +43,7 @@
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 
 .react {
@@ -50,11 +51,37 @@
     background: #EEE;
     border: 1px solid #ccc;
     cursor: pointer;
-}
-
-.react {
     padding: 3px 10px;
     background: #EEE;
     border: 1px solid #ccc;
     cursor: pointer;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+}
+
+.react img {
+    height: 22px;
+    margin: 0 5px;
+}
+
+.react .reactors {
+    position: absolute;
+    padding: 5px 10px;
+    background: #eee;
+    border: 1px solid #ccc;
+    opacity: 0;
+    transition: all .2s ease;
+    pointer-events: none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    top: 0;
+}
+
+.react:hover .reactors {
+    top: -40px;
+    opacity: 1;
 }

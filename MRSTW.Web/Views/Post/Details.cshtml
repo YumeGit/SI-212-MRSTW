@@ -38,15 +38,19 @@
 </div>
 
 <div class="react_container">
-    <div class="react">
-        🥤 123
-    </div>
-    <div class="react">
-        👎 123
-    </div>
-    <div class="react">
-        🐵 123
-    </div>
+    @{ 
+        var emojis = Model.Reactions.GroupBy(x => x.Emoji);
+    }
+
+    @foreach(var emoji in emojis)
+    {
+        <div class="react">
+            <div class="reactors">
+                @string.Join(", ", emoji.Select(x => x.User.Name)) reacted with @Html.Raw(@emoji.Key)
+            </div>
+            @Html.Raw(@emoji.Key) @emoji.Count()
+        </div>
+    }
 </div>
 
 <div>

@@ -134,6 +134,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserReaction.cs" />
     <Compile Include="Models\View\LoginForm.cs" />
     <Compile Include="Models\View\PostCommentForm.cs" />
     <Compile Include="Models\View\RegisterForm.cs" />
@@ -183,6 +184,13 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MRSTW.Domain\MRSTW.Domain.csproj">

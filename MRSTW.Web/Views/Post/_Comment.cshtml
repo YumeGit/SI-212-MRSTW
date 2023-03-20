@@ -6,4 +6,20 @@
         <span>at @Model.Created.ToShortDateString() @Model.Created.ToShortTimeString()</span>
     </div>
     <div class="message">@Model.Message</div>
+
+    <div class="react_container">
+        @{
+            var emojis = Model.Reactions.GroupBy(x => x.Emoji);
+        }
+
+        @foreach (var emoji in emojis)
+        {
+            <div class="react">
+                <div class="reactors">
+                    @string.Join(", ", emoji.Select(x => x.User.Name)) reacted with @Html.Raw(@emoji.Key)
+                </div>
+                @Html.Raw(@emoji.Key) @emoji.Count()
+            </div>
+        }
+    </div>
 </div>
