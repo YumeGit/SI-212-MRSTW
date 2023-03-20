@@ -1,13 +1,12 @@
-﻿using MRSTW.Web.Database;
-using MRSTW.Web.Models;
+﻿using MRSTW.BusinessLogic.Database;
+using MRSTW.Domain;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
-    public class UsersController : Controller
+	public class UsersController : Controller
     {
         private BlogDbContext db = new BlogDbContext();
 

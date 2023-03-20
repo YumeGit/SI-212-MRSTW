@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MRSTW.Web.Models
+namespace MRSTW.Domain
 {
 	public class Post
 	{

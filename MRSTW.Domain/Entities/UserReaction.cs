@@ -1,4 +1,4 @@
-﻿namespace MRSTW.Web.Models
+﻿namespace MRSTW.Domain
 {
     public class UserReaction
     {

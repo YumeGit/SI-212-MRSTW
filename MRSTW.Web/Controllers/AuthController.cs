@@ -1,12 +1,12 @@
-﻿using MRSTW.Domain;
-using MRSTW.Web.Database;
+﻿using MRSTW.BusinessLogic.Database;
+using MRSTW.Domain;
 using MRSTW.Web.Models.View;
 using System;
 using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
-    public class AuthController : Controller
+	public class AuthController : Controller
 	{
 		BlogDbContext Database;
 		// readonly ISession SessionBL;

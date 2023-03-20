@@ -1,7 +1,7 @@
-﻿using MRSTW.Web.Models;
+﻿using MRSTW.Domain;
 using System.Data.Entity;
 
-namespace MRSTW.Web.Database
+namespace MRSTW.BusinessLogic.Database
 {
 	public class BlogDbContext : DbContext
 	{

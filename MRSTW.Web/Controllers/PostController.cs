@@ -1,9 +1,9 @@
-﻿using MRSTW.Web.Database;
-using MRSTW.Web.Models;
+﻿using MRSTW.Domain;
 using MRSTW.Web.Models.View;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using MRSTW.BusinessLogic.Database;
 
 namespace MRSTW.Web.Controllers
 {

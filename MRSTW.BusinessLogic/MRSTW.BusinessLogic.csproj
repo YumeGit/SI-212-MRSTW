@@ -2,19 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <UserSecretsId>f0749df0-0f28-439a-be4f-8fba067608be</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="API\**" />
-    <EmbeddedResource Remove="API\**" />
-    <None Remove="API\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="BusinessLogic.cs" />
-    <Compile Remove="ISession.cs" />
-    <Compile Remove="SessionBL.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MRSTW.Domain\MRSTW.Domain.csproj" />
