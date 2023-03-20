@@ -5,6 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="API\**" />
+    <EmbeddedResource Remove="API\**" />
+    <None Remove="API\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="BusinessLogic.cs" />
+    <Compile Remove="ISession.cs" />
+    <Compile Remove="SessionBL.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MRSTW.Domain\MRSTW.Domain.csproj" />
     <ProjectReference Include="..\MRSTW.Helpers\MRSTW.Helpers.csproj" />
   </ItemGroup>

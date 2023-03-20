@@ -1,5 +1,4 @@
-﻿using MRSTW.BusinessLogic;
-using MRSTW.Domain;
+﻿using MRSTW.Domain;
 using MRSTW.Web.Database;
 using MRSTW.Web.Models.View;
 using System;
@@ -7,15 +6,15 @@ using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
-	public class AuthController : Controller
+    public class AuthController : Controller
 	{
 		BlogDbContext Database;
-		readonly ISession SessionBL;
+		// readonly ISession SessionBL;
 
 		public AuthController()
 		{
 			Database = new BlogDbContext();
-			SessionBL = new BusinessLogic.BusinessLogic().GetSessionBL();
+			// SessionBL = new BusinessLogic.BusinessLogic().GetSessionBL();
 		}
 
 		// GET: /Auth/Login
@@ -39,7 +38,7 @@ namespace MRSTW.Web.Controllers
 					Time = DateTime.Now
 				};
 
-				var userLogin = SessionBL.UserLogin(data);
+				/*var userLogin = SessionBL.UserLogin(data);
 				if(userLogin.Status)
 				{
 					return Redirect("/");
@@ -47,7 +46,7 @@ namespace MRSTW.Web.Controllers
 				else
 				{
 					ModelState.AddModelError("Password", "Invalid login or password.");
-				}
+				}*/
 			}
 
 			return View(form);
