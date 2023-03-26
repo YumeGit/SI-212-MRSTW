@@ -1,5 +1,4 @@
 ﻿using MRSTW.BusinessLogic.Database;
-using MRSTW.BusinessLogic.Service.Response;
 using MRSTW.Helpers;
 using System;
 using System.Data.Entity;
@@ -7,7 +6,7 @@ using System.Linq;
 
 namespace MRSTW.BusinessLogic.Service
 {
-    public class AuthService : Response.Service
+    public class AuthService : Service
     {
         public struct LoginData
         {
@@ -23,7 +22,7 @@ namespace MRSTW.BusinessLogic.Service
             {
                 var passHash = AuthHelper.GeneratePasswordHash(data.Password);
 
-                var user = db.Users.Single(x => x.Email == data.Email && x.PasswordHash == passHash);
+                var user = db.Users.FirstOrDefault(x => x.Email == data.Email && x.PasswordHash == passHash);
                 if (user == null)
                     return Failure("User with this pair not found.");
 
