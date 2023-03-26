@@ -1,36 +1,34 @@
 ﻿using MRSTW.BusinessLogic.Service;
-using System.Data.Entity;
-using System.Linq;
+using MRSTW.Controllers;
+using MRSTW.Domain.Entities;
+using MRSTW.Web.Models;
 using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
-	public class PostController : Controller
+	public class PostController : BaseBlogController
 	{
+		PostService Posts = new PostService();
+
 		public ActionResult Details(int? id)
 		{
 			if (id == null)
 				return HttpNotFound();
 
-			using (var posts = new PostService())
-			{
-				// Find the post entry in the database, also load the author entry,
-				// and all the comments.
-				var postResponse = posts.GetPostById(id.Value);
-				if (!postResponse.Success)
-				{
-					return new HttpStatusCodeResult(403);
-				}
+			// Find the post entry in the database, also load the author entry,
+			// and all the comments.
+			var postResponse = Posts.GetPostById(id.Value);
+			if (!postResponse.Success)
+				return HttpNoPermission();
 
-				var post = postResponse.Entry;
-				if (post == null)
-					return HttpNotFound();
+			var post = postResponse.Entry;
+			if (post == null)
+				return HttpNotFound();
 
-				posts.IncrementViewCount(post);
+			Posts.IncrementViewCount(post);
 
-				// Show the full story of the post.
-				return View(post);
-			}
+			// Show the full story of the post.
+			return View(post);
 		}
 
 		public ActionResult Edit(int? id)
@@ -38,114 +36,107 @@ namespace MRSTW.Web.Controllers
 			if (id == null)
 				return HttpNotFound();
 
-			using (var posts = new PostService())
-			{
-				var post = posts.GetPostById(id.Value);
-				if (!post.Success)
-					return new HttpStatusCodeResult(403);
+			var post = Posts.GetPostById(id.Value);
+			if (!post.Success)
+				return HttpNoPermission();
 
-				if (post == null)
-					return HttpNotFound();
+			if (post == null)
+				return HttpNotFound();
 
-				return View(post.Entry);
-			}
+			return View(post.Entry);
 		}
 
-#if false
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Edit([Bind(Include = "Id,Name,Story")] Post post)
+		{
+			if (ModelState.IsValid)
+			{
+				var r = Posts.Edit(post);
+				if (r.Success)
+					return RedirectToAction("Details");
+
+				return HttpNoPermission();
+			}
+
+			return View(post);
+		}
+
+		public ActionResult Delete(int? id)
+		{
+			if (id == null)
+				return HttpNotFound();
+
+			var post = Posts.GetPostById(id.Value);
+			if (!post.Success)
+				return HttpNoPermission();
+
+			if (post == null)
+				return HttpNotFound();
+
+			return View(post.Entry);
+		}
+
+		[HttpPost]
+		[ActionName("Delete")]
+		public ActionResult DeleteConfirmed(int? id)
+		{
+			if (id == null)
+				return HttpNotFound();
+
+			var resp = Posts.GetPostById(id.Value);
+			if(!resp.Success)
+				return HttpNoPermission();
+
+			var post = resp.Entry;
+			if (post == null)
+				return HttpNotFound();
+
+			var delResp = Posts.Delete(post);
+			if(!delResp.Success)
+				return HttpNoPermission();
+
+			return Redirect("/");
+		}
 
 		public ActionResult Comments(int? id)
 		{
-			// Fetch the post entry 
-			var post = DbContext.Posts
-				.Include(x => x.Comments.Select(y => y.Author))
-                .Include(x => x.Comments.Select(y => y.Reactions))
-                .First(x => x.Id == id);
+			if (id == null)
+				return HttpNotFound();
 
-			// Sort comments by their creation date.
-			post.Comments = post.Comments
-				.OrderByDescending(x => x.Created)
-				.ToList();
+			var resp = Posts.GetPostById(id.Value);
+			if(!resp.Success)
+				return HttpNoPermission();
+
+			var post = resp.Entry;
+			if (Posts.LoadComments(post).Success == false) 
+				return HttpNoPermission();
 
 			return View(post);
 	}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Comments(PostCommentForm form)
-        {
-            var post = DbContext.Posts
-                .Include(x => x.Comments.Select(y => y.Author))
-                .Include(x => x.Comments.Select(y => y.Reactions))
-                .First(x => x.Id == form.Id);
-
-            // Post was not found.
-            if (post == null)
-				return HttpNotFound();
-
-			// Create a new comment
+		public ActionResult Comments(CommentForm form)
+		{
 			if (ModelState.IsValid)
 			{
-				var user = DbContext.Users
-					.FirstOrDefault();
+				var postResp = Posts.GetPostById(form.PostId);
+				if(!postResp.Success)
+					return HttpNoPermission();
+
+				var post = postResp.Entry;
+				if (post == null)
+					return HttpNotFound();
 
 				var comment = new Comment
 				{
-					Author = user,
-					Message = form.Message
+					Message = form.Message,
+					Author = 
 				};
-
-				post.Comments.Add(comment);
-				DbContext.SaveChanges();
 			}
 
-			post.Comments = post.Comments
-				.OrderByDescending(x => x.Created)
-				.ToList();
-
-			return View(post);
+			return View();
         }
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Name,Story")] Post post)
-        {
-            if (ModelState.IsValid)
-            {
-				// Trim the story content.
-				post.Story = post.Story.Trim();
-
-                DbContext.Entry(post).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Details", new { post.Id } );
-            }
-
-            return View(post);
-        }
-
-		public ActionResult Delete(int? id)
-		{
-			// Id was not provided.
-			if (id == null)
-				return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-
-			// Fetch post entry.
-			var post = DbContext.Posts
-				.First(x => x.Id == id);
-
-			// Post was not found.
-			if (post == null)
-				return HttpNotFound();
-
-			return View(post);
-		}
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-                DbContext.Dispose();
-
-            base.Dispose(disposing);
-        }
-#endif
 	}
 }

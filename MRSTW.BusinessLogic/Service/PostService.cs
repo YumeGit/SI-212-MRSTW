@@ -5,47 +5,66 @@ using System.Linq;
 
 namespace MRSTW.BusinessLogic.Service
 {
-    public class PostService : Service
+	public class PostService : Service
 	{
+		BlogDbContext DbContext = new BlogDbContext();
+
 		public EntryServiceResponse<Post> GetPostById(int id)
 		{
-            using (var db = new BlogDbContext())
-            {
-                var post = db.Posts
-                    .Include(x => x.Author)
-                    .Include(x => x.Comments)
-                    .Include(x => x.Reactions.Select(y => y.User))
-                    .First(x => x.Id == id);
+            var post = DbContext.Posts
+                .Include(x => x.Author)
+                .Include(x => x.Comments)
+                .Include(x => x.Reactions.Select(y => y.User))
+                .First(x => x.Id == id);
 
-                if (post == null)
-                    return Failure<EntryServiceResponse<Post>>("No Post has been found");
-
-                return Entry(post);
-            }
-		}
+            return Entry(post);
+	}
 
         public EntriesServiceResponse<Post> GetAllPosts()
         {
-            using (var db = new BlogDbContext())
-            {
-                var posts = db.Posts
-                    .Include(x => x.Author)
-                    .OrderByDescending(x => x.Created)
-                    .ToList();
+            var posts = DbContext.Posts
+                .Include(x => x.Author)
+                .OrderByDescending(x => x.Created)
+                .ToList();
 
-                return Entries(posts);
-            }
+            return Entries(posts);
 		}
 
         public ServiceResponse IncrementViewCount(Post post)
         {
-			using (var db = new BlogDbContext())
-			{
-                post.Views++;
-                db.Entry(post).State = EntityState.Modified;
-                db.SaveChanges();
-                return Success();
-			}
+            post.Views++;
+
+            DbContext.Entry(post).State = EntityState.Modified;
+            DbContext.SaveChanges();
+            return Success();
+		}
+
+		public ServiceResponse Edit(Post post)
+		{
+			// Trim the story content.
+			post.Story = post.Story.Trim();
+
+			DbContext.Entry(post).State = EntityState.Modified;
+			DbContext.SaveChanges();
+			return Success();
+		}
+
+		public ServiceResponse Delete(Post post)
+		{
+			DbContext.Entry(post).State = EntityState.Deleted;
+			DbContext.SaveChanges();
+			return Success();
+		}
+
+		public ServiceResponse LoadComments(Post post)
+		{
+			post.Comments = DbContext.Entry(post)
+				.Collection(x => x.Comments).Query()
+				.Include(x => x.Reactions.Select(y => y.User))
+				.Include(x => x.Author)
+				.ToList();
+
+			return Success();
 		}
 	}
 }
