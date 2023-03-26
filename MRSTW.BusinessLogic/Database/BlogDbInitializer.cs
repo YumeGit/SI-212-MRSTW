@@ -13,7 +13,7 @@ namespace MRSTW.BusinessLogic.Database
 			var moonlydays = new User()
 			{
 				Name = "Daniel Basiuc-Brinzei",
-				Password = "test",
+				PasswordHash = "test",
 				Email = "test@gmail.com"
 			};
 			context.Users.Add(moonlydays);
@@ -22,7 +22,7 @@ namespace MRSTW.BusinessLogic.Database
 			var yume = new User()
 			{
 				Name = "Maxim Resetnicov",
-				Password = "test",
+				PasswordHash = "test",
 				Email = "maximka@gmail.com"
 			};
 			context.Users.Add(yume);
@@ -31,7 +31,7 @@ namespace MRSTW.BusinessLogic.Database
 			var dimka = new User()
 			{
 				Name = "Dimka",
-				Password = "test",
+				PasswordHash = "test",
 				Email = "strusovchii@gmail.com"
 			};
 			context.Users.Add(dimka);
@@ -40,7 +40,7 @@ namespace MRSTW.BusinessLogic.Database
 			var xen = new User()
 			{
 				Name = "Xenzenko",
-				Password = "test",
+				PasswordHash = "test",
 				Email = "xenzenko@gmail.com"
 			};
 			context.Users.Add(xen);
