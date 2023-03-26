@@ -1,35 +1,57 @@
-﻿using System.Linq;
+﻿using MRSTW.BusinessLogic.Service;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
 	public class PostController : Controller
 	{
-#if false
-		BlogDbContext DbContext { get; set; } = new BlogDbContext();
-
 		public ActionResult Details(int? id)
 		{
-			// Find the post entry in the database, also load the author entry,
-			// and all the comments.
-			var post = DbContext.Posts
-				.Include(x => x.Author)
-				.Include(x => x.Comments)
-				.Include(x => x.Reactions.Select(y => y.User))
-				.First(x => x.Id == id);
-
-			// If we didn't find a post - bail.
-			if (post == null)
+			if (id == null)
 				return HttpNotFound();
 
-			// Increase the viewcount.
-			post.Views++;
-			// And save the changes in the database.
-			DbContext.SaveChanges();
+			using (var posts = new PostService())
+			{
+				// Find the post entry in the database, also load the author entry,
+				// and all the comments.
+				var postResponse = posts.GetPostById(id.Value);
+				if (!postResponse.Success)
+				{
+					return new HttpStatusCodeResult(403);
+				}
 
-			// Show the full story of the post.
-			return View(post);
+				var post = postResponse.Entry;
+				if (post == null)
+					return HttpNotFound();
+
+				posts.IncrementViewCount(post);
+
+				// Show the full story of the post.
+				return View(post);
+			}
 		}
+
+		public ActionResult Edit(int? id)
+		{
+			if (id == null)
+				return HttpNotFound();
+
+			using (var posts = new PostService())
+			{
+				var post = posts.GetPostById(id.Value);
+				if (!post.Success)
+					return new HttpStatusCodeResult(403);
+
+				if (post == null)
+					return HttpNotFound();
+
+				return View(post.Entry);
+			}
+		}
+
+#if false
 
 		public ActionResult Comments(int? id)
 		{
@@ -83,18 +105,6 @@ namespace MRSTW.Web.Controllers
 			return View(post);
         }
 
-        public ActionResult Edit(int? id)
-        {
-            var post = DbContext.Posts
-                .First(x => x.Id == id);
-
-			// Post was not found.
-			if (post == null)
-				return HttpNotFound();
-
-            return View(post);
-        }
-
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit([Bind(Include = "Id,Name,Story")] Post post)
@@ -137,5 +147,5 @@ namespace MRSTW.Web.Controllers
             base.Dispose(disposing);
         }
 #endif
-    }
+	}
 }
