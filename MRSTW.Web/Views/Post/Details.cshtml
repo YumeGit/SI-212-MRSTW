@@ -1,4 +1,4 @@
-﻿@model MRSTW.Web.Models.Post
+﻿@model MRSTW.Domain.Entities.Post
 
 @{
     ViewBag.Title = Model.Name;
@@ -27,8 +27,6 @@
     <small>
 
         <a href="@Url.Action("Edit", "Post", new { id = Model.Id })">[Редактировать]</a>
-        <a href="/Post/Edit/@Model.Id">[Редактировать]</a>
-
         <a href="@Url.Action("Delete", "Post", new { id = Model.Id })">[Удалить]</a>
     </small>
 </div>

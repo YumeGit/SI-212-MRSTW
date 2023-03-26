@@ -16,7 +16,7 @@ namespace MRSTW.Domain.Entities
 		public string Name { get; set; }
 		public string PasswordHash { get; set; }
 		public string LastIpAddress { get; set; }
-		public DateTime LastLoginTime { get; set; }
+		public DateTime LastLoginTime { get; set; } = DateTime.Now;
 		public UserRole Role { get; set; }
 	}
 }
