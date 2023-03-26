@@ -4,9 +4,9 @@ namespace MRSTW.BusinessLogic.API
 {
 	public class UserApi
 	{
-		public RequestResponseAction UserLoginAction(ULoginData data)
+		public RequestResponse UserLoginAction(UserLoginData data)
 		{
-			return new RequestResponseAction();
+			return new RequestResponse();
 		}
 	}
 }

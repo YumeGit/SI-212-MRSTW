@@ -8,12 +8,10 @@ namespace MRSTW.Web.Controllers
 	public class AuthController : Controller
 	{
 		BlogDbContext Database;
-		// readonly ISession SessionBL;
 
 		public AuthController()
 		{
 			Database = new BlogDbContext();
-			// SessionBL = new BusinessLogic.BusinessLogic().GetSessionBL();
 		}
 
 		// GET: /Auth/Login
@@ -29,7 +27,7 @@ namespace MRSTW.Web.Controllers
 		{
 			if(ModelState.IsValid)
 			{
-				var data = new LoginData()
+				var data = new UserLoginData()
 				{
 					Email = form.Email,
 					Password = form.Password,

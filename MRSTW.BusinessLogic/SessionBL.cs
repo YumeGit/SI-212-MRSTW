@@ -5,7 +5,7 @@ namespace MRSTW.BusinessLogic
 {
 	public class SessionBL : UserApi, ISession
 	{
-		public RequestResponseAction UserLogin(ULoginData data)
+		public RequestResponse UserLogin(UserLoginData data)
 		{
 			return UserLoginAction(data);
 		}

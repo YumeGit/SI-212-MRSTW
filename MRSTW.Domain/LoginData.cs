@@ -2,7 +2,7 @@
 
 namespace MRSTW.Domain
 {
-    public class LoginData
+    public class UserLoginData
     {
         public string Email { get; set; }
         public string Password { get; set; }

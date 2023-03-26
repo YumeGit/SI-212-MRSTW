@@ -291,18 +291,8 @@
     <Content Include="Content\scss\_variables.scss" />
     <Content Include="Content\lib\owlcarousel\LICENSE" />
     <Content Include="Content\lib\waypoints\links.php" />
-    <None Include="Views\Home\about.cshtml" />
-    <None Include="Views\Home\appointment.cshtml" />
-    <None Include="Views\Home\Contact.cshtml" />
-    <None Include="Views\Home\doctor_page.cshtml" />
-    <None Include="Views\Home\Index.cshtml" />
-    <None Include="Views\Home\price.cshtml" />
-    <None Include="Views\Home\service.cshtml" />
-    <None Include="Views\Home\sign_in.cshtml" />
-    <Content Include="Views\Home\sign_up.cshtml" />
-    <None Include="Views\Home\team.cshtml" />
-    <None Include="Views\Home\testimonial.cshtml" />
-    <None Include="Views\Home\user.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -335,22 +325,22 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
-    <Content Include="Views\Home\README.md" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Spinner.cshtml" />
-    <Content Include="Views\Shared\_Topbar.cshtml" />
-    <Content Include="Views\Shared\_Navbar.cshtml" />
-    <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Shared\_Carousel.cshtml" />
-    <Content Include="Views\Shared\_Banner.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Shared\_Js.cshtml" />
-    <Content Include="Views\Shared\_Newsletter.cshtml" />
-    <Content Include="Views\Shared\_LPages.cshtml" />
-    <Content Include="Views\Shared\_LDoctor.cshtml" />
-    <Content Include="Views\Shared\_LUser.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\_ShortPost.cshtml" />
+    <Content Include="Views\Post\Comments.cshtml" />
+    <Content Include="Views\Post\Delete.cshtml" />
+    <Content Include="Views\Post\Details.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
+    <Content Include="Views\Post\_Comment.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -360,8 +350,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MRSTW.BusinessLogic\MRSTW.BusinessLogic.csproj">
