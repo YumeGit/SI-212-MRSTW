@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using MRSTW.BusinessLogic.Service;
 using System.Web.Mvc;
 
 namespace MRSTW.Web
@@ -7,14 +7,10 @@ namespace MRSTW.Web
 	{
 		public ActionResult Index()
 		{
-			using (var c = new BlogDbContext())
+			using (var posts = new PostService())
 			{
-				var posts = c.Posts
-					.OrderByDescending(x => x.Created)
-					.Include(x => x.Author)
-					.ToList();
-
-				return View(posts);
+				var allPosts = posts.GetAllPosts();
+				return View(allPosts.Entries);
 			}
 		}
 	}
