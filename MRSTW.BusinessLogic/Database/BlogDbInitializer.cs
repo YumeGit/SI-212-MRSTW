@@ -1,7 +1,8 @@
-﻿using System;
+﻿using MRSTW.Domain.Entities;
+using MRSTW.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using MRSTW.Domain.Entities;
 
 namespace MRSTW.BusinessLogic.Database
 {
@@ -9,39 +10,35 @@ namespace MRSTW.BusinessLogic.Database
 	{
 		protected override void Seed(BlogDbContext context)
 		{
-			// Moonly Days
 			var moonlydays = new User()
 			{
 				Name = "Daniel Basiuc-Brinzei",
-				PasswordHash = "test",
-				Email = "test@gmail.com"
+				PasswordHash = AuthHelper.GeneratePasswordHash("password123"),
+				Email = "daniil.basiuc-brinzei@isa.utm.md"
 			};
 			context.Users.Add(moonlydays);
 
-			// Yume
 			var yume = new User()
 			{
 				Name = "Maxim Resetnicov",
-				PasswordHash = "test",
-				Email = "maximka@gmail.com"
+				PasswordHash = AuthHelper.GeneratePasswordHash("password321"),
+				Email = "maxim.resetnicov@isa.utm.md"
 			};
 			context.Users.Add(yume);
 
-			// Dimka
 			var dimka = new User()
 			{
-				Name = "Dimka",
-				PasswordHash = "test",
-				Email = "strusovchii@gmail.com"
+				Name = "Dmitrii Strusovschii",
+				PasswordHash = AuthHelper.GeneratePasswordHash("passwordasd"),
+				Email = "dmitrii.strusovschii@isa.utm.md"
 			};
 			context.Users.Add(dimka);
 
-			// Xen
 			var xen = new User()
 			{
-				Name = "Xenzenko",
-				PasswordHash = "test",
-				Email = "xenzenko@gmail.com"
+				Name = "Ecaterina Xenzenko",
+				PasswordHash = AuthHelper.GeneratePasswordHash("passwordqwe"),
+				Email = "ecaterina.xenzenko@isa.utm.md"
 			};
 			context.Users.Add(xen);
 
