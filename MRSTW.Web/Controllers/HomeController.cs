@@ -9,7 +9,7 @@ namespace MRSTW.Web
 		{
 			using (var posts = new PostService())
 			{
-				var allPosts = posts.GetAllPosts();
+				var allPosts = posts.GetAll();
 				return View(allPosts.Entries);
 			}
 		}
