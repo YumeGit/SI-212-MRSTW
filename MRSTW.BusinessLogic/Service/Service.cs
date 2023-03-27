@@ -1,12 +1,14 @@
-﻿using System;
+﻿using MRSTW.BusinessLogic.Database;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 
 namespace MRSTW.BusinessLogic.Service
 {
     public class Service : IDisposable
-	{
-		protected T Success<T>() where T : ServiceResponse, new()
+    {
+        protected BlogDbContext DbContext = new BlogDbContext();
+
+        protected T Success<T>() where T : ServiceResponse, new()
 		{
             return new T { Success = true };
 		}
