@@ -2,7 +2,10 @@
 using MRSTW.Controllers;
 using MRSTW.Domain.Entities;
 using MRSTW.Web.Models;
+using System;
+using System.Data.Entity;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace MRSTW.Web.Controllers
 {
@@ -17,7 +20,7 @@ namespace MRSTW.Web.Controllers
 
 			// Find the post entry in the database, also load the author entry,
 			// and all the comments.
-			var postResponse = Posts.GetPostById(id.Value);
+			var postResponse = Posts.GetById(id.Value);
 			if (!postResponse.Success)
 				return HttpNoPermission();
 
@@ -36,7 +39,7 @@ namespace MRSTW.Web.Controllers
 			if (id == null)
 				return HttpNotFound();
 
-			var post = Posts.GetPostById(id.Value);
+			var post = Posts.GetById(id.Value);
 			if (!post.Success)
 				return HttpNoPermission();
 
@@ -67,7 +70,7 @@ namespace MRSTW.Web.Controllers
 			if (id == null)
 				return HttpNotFound();
 
-			var post = Posts.GetPostById(id.Value);
+			var post = Posts.GetById(id.Value);
 			if (!post.Success)
 				return HttpNoPermission();
 
@@ -84,7 +87,7 @@ namespace MRSTW.Web.Controllers
 			if (id == null)
 				return HttpNotFound();
 
-			var resp = Posts.GetPostById(id.Value);
+			var resp = Posts.GetById(id.Value);
 			if(!resp.Success)
 				return HttpNoPermission();
 
@@ -104,39 +107,62 @@ namespace MRSTW.Web.Controllers
 			if (id == null)
 				return HttpNotFound();
 
-			var resp = Posts.GetPostById(id.Value);
+			var resp = Posts.GetById(id.Value);
 			if(!resp.Success)
 				return HttpNoPermission();
 
 			var post = resp.Entry;
-			if (Posts.LoadComments(post).Success == false) 
-				return HttpNoPermission();
+			using (var commentsService = new CommentService())
+			{
+				var comResp = commentsService.GetAllFromPost(post);
+				if(!comResp.Success)
+					return HttpNoPermission();
 
-			return View(post);
-	}
+				return View(post);
+			}
+		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Comments(CommentForm form)
-		{
-			if (ModelState.IsValid)
+        {
+            var postResp = Posts.GetById(form.PostId);
+            if (!postResp.Success)
+                return HttpNoPermission();
+
+            var post = postResp.Entry;
+            if (post == null)
+                return HttpNotFound();
+
+            if (ModelState.IsValid)
 			{
-				var postResp = Posts.GetPostById(form.PostId);
-				if(!postResp.Success)
-					return HttpNoPermission();
-
-				var post = postResp.Entry;
-				if (post == null)
-					return HttpNotFound();
-
-				var comment = new Comment
+				using (var commentsService = new CommentService()) 
 				{
-					Message = form.Message,
-					Author = 
-				};
+					{
+						var comResp = commentsService.GetAllFromPost(post);
+						if (!comResp.Success)
+							return HttpNoPermission();
+					}
+
+                    var data = new CommentService.CommentForm()
+					{
+						Message = form.Message,
+						Author = new UserService().GetById(1).Entry,
+						Time = DateTime.Now
+					};
+
+
+					{
+						var comResp = commentsService.AddToPost(post, data);
+						if(!comResp.Success)
+							return HttpNoPermission();
+					}
+
+					post.Comments = post.Comments.OrderByDescending(x => x.Created).ToList();
+				}
 			}
 
-			return View();
+			return View(post);
         }
 	}
 }

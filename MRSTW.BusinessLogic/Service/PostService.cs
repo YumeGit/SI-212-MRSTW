@@ -7,9 +7,7 @@ namespace MRSTW.BusinessLogic.Service
 {
 	public class PostService : Service
 	{
-		BlogDbContext DbContext = new BlogDbContext();
-
-		public EntryServiceResponse<Post> GetPostById(int id)
+		public EntryServiceResponse<Post> GetById(int id)
 		{
             var post = DbContext.Posts
                 .Include(x => x.Author)
@@ -20,7 +18,7 @@ namespace MRSTW.BusinessLogic.Service
             return Entry(post);
 	}
 
-        public EntriesServiceResponse<Post> GetAllPosts()
+        public EntriesServiceResponse<Post> GetAll()
         {
             var posts = DbContext.Posts
                 .Include(x => x.Author)
@@ -41,7 +39,6 @@ namespace MRSTW.BusinessLogic.Service
 
 		public ServiceResponse Edit(Post post)
 		{
-			// Trim the story content.
 			post.Story = post.Story.Trim();
 
 			DbContext.Entry(post).State = EntityState.Modified;
@@ -53,17 +50,6 @@ namespace MRSTW.BusinessLogic.Service
 		{
 			DbContext.Entry(post).State = EntityState.Deleted;
 			DbContext.SaveChanges();
-			return Success();
-		}
-
-		public ServiceResponse LoadComments(Post post)
-		{
-			post.Comments = DbContext.Entry(post)
-				.Collection(x => x.Comments).Query()
-				.Include(x => x.Reactions.Select(y => y.User))
-				.Include(x => x.Author)
-				.ToList();
-
 			return Success();
 		}
 	}
