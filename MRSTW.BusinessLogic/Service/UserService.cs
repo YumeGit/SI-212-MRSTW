@@ -1,5 +1,4 @@
-﻿using MRSTW.BusinessLogic.Database;
-using MRSTW.Domain.Entities;
+﻿using MRSTW.Domain.Entities;
 using System.Data.Entity;
 using System.Linq;
 
@@ -31,12 +30,9 @@ namespace MRSTW.BusinessLogic.Service
             return Success();
         }
 
-        public EntriesServiceResponse<Post> GetAllUsers()
+        public EntriesServiceResponse<User> GetAll()
         {
-            var posts = DbContext.Posts
-                .ToList();
-
-            return Entries(posts);
+            return Entries(DbContext.Users.ToList());
         }
     }
 }

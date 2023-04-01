@@ -4,7 +4,6 @@ namespace MRSTW.Domain.Entities
 {
 	public enum UserRole
 	{
-		Guest,
 		User,
 		Admin
 	}

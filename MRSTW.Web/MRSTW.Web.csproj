@@ -105,7 +105,7 @@
     <Content Include="Content\Images\photo_2022-06-30_23-49-36.jpg" />
     <Content Include="Content\Images\photo_2023-02-10_21-43-50.jpg" />
     <Content Include="Content\Styles\Login.css" />
-    <Content Include="Content\Styles\Main.css" />
+    <None Include="Content\Styles\Main.scss" />
     <Content Include="Content\Styles\Post.css" />
     <Content Include="Content\Styles\Registrarion.css" />
     <Content Include="Content\Styles\Shared.css" />

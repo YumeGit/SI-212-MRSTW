@@ -1,13 +1,24 @@
 ﻿<header>
-    <div class="logotype">My Favourite Blog</div>
-    <nav>
-        <ul class="flex centered">
-            <li>@Html.ActionLink("Home", "", "")</li>
-
-            <li>@Html.ActionLink("All Users", "Index", "Users")</li>
-
-            <li>@Html.ActionLink("Sign Up", "Register", "Auth")</li>
-            <li>@Html.ActionLink("Sign In", "Login", "Auth")</li>
-        </ul>
-    </nav>
+    <div class="container header_container">
+        <div class="header_column">
+            <div class="header_logotype">
+                <img src="~/Content/Images/Clyde.png" />
+                <div class="text">Clyde Blog</div>
+            </div>
+        </div>
+        <div class="header_column">
+            <div class="header_navigation">
+                <ul>
+                    <li>Catergory #1</li>
+                    <li>Catergory #2</li>
+                    <li>Catergory #3</li>
+                    <li>Catergory #4</li>
+                </ul>
+            </div>
+            <div class="header_login">
+                <button class="secondary">Sign In</button>
+                <button class="primary">Sign Up</button>
+            </div>
+        </div>
+    </div>
 </header>

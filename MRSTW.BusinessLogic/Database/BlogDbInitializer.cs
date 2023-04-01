@@ -90,6 +90,11 @@ namespace MRSTW.BusinessLogic.Database
 					{
 						User = moonlydays,
 						Emoji = "<img src='https://www.icegif.com/wp-content/uploads/2022/09/icegif-279.gif' />"
+					},
+					new UserReaction()
+					{
+						User = xen,
+						Emoji = "<img src='https://www.icegif.com/wp-content/uploads/2022/09/icegif-279.gif' />"
 					}
 				},
 				Comments = new List<Comment>()

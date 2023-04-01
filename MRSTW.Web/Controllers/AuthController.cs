@@ -1,5 +1,4 @@
-﻿using MRSTW.BusinessLogic.Database;
-using MRSTW.BusinessLogic.Service;
+﻿using MRSTW.BusinessLogic.Service;
 using MRSTW.Web.Models;
 using System;
 using System.Web.Mvc;
@@ -8,13 +7,6 @@ namespace MRSTW.Web.Controllers
 {
 	public class AuthController : Controller
 	{
-		BlogDbContext Database;
-
-		public AuthController()
-		{
-			Database = new BlogDbContext();
-		}
-
 		// GET /Auth/Login
 		public ActionResult Login()
 		{
@@ -39,13 +31,9 @@ namespace MRSTW.Web.Controllers
 
 					var loginStatus = authService.Login(data);
 					if(loginStatus.Success)
-					{
 						return Redirect("/");
-					}
-					else
-					{
+
 						ModelState.AddModelError("Password", loginStatus.Message);
-					}
 				}
 			}
 
@@ -61,9 +49,30 @@ namespace MRSTW.Web.Controllers
 		// POST: /Auth/Register
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Register(RegisterForm vm)
+		public ActionResult Register(RegisterForm form)
 		{
-			return View();
+			if (ModelState.IsValid)
+			{
+				using (var authService = new AuthService())
+				{
+					var data = new AuthService.RegisterData()
+					{
+						Name = form.Name,
+						Email = form.Email,
+						Password = form.Password,
+						IpAddress = Request.UserHostAddress,
+						Time = DateTime.Now
+					};
+
+					var loginStatus = authService.Register(data);
+					if (loginStatus.Success)
+					{ return Redirect("/"); }
+
+					ModelState.AddModelError("", loginStatus.Message);
+				}
+			}
+
+			return View(form);
 		}
 	}
 }

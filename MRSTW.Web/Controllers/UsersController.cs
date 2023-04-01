@@ -1,17 +1,19 @@
-﻿using System.Web.Mvc;
+﻿using MRSTW.BusinessLogic.Service;
+using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
     public class UsersController : Controller
-    {
+	{
+		public ActionResult Index()
+		{
+			using (var users = new UserService())
+			{
+				var allUsers = users.GetAll();
+				return View(allUsers.Entries);
+			}
+		}
 #if false
-        private BlogDbContext db = new BlogDbContext();
-
-        // GET: Users
-        public ActionResult Index()
-        {
-            return View(db.Users.ToList());
-        }
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
@@ -107,5 +109,5 @@ namespace MRSTW.Web.Controllers
             base.Dispose(disposing);
         }
 #endif
-    }
+	}
 }

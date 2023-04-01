@@ -1,4 +1,4 @@
-﻿@model MRSTW.Web.Models.View.RegisterForm
+﻿@model MRSTW.Web.Models.RegisterForm
 
 @{
     ViewBag.Title = "Sign Up";
@@ -17,6 +17,7 @@
     @Html.AntiForgeryToken()
 
     <h1 title="Please, fill in all the empty fields">Registration</h1>
+    @Html.ValidationMessage("")
     <div class="group">
         @Html.LabelFor(x => x.Email)
         @Html.EditorFor(x => x.Email)
