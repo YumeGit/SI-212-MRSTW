@@ -1,6 +1,13 @@
 ﻿:root {
     --orange1: #f9b433;
     --orange2: #ff6f39;
+    --ink: #20242c;
+    --card-drop-shadow: 0px 0px 10px rgba(0,0,0,.05);
+}
+
+a {
+    color: var(--orange1);
+    text-decoration: none;
 }
 
 body {
@@ -8,10 +15,14 @@ body {
     margin: 0;
     color: #20242c;
     font-family: "Poppins", sans-serif;
+    background-color: #F6F6F6;
 }
 
 header {
     padding: 20px 40px;
+    background-color: white;
+    box-shadow: var(--card-drop-shadow);
+    margin-bottom: 20px;
 }
 
 .header_container {
@@ -134,4 +145,15 @@ button.secondary {
     color: var(--orange2);
     border-color: var(--orange2);
     font-size: 15px;
+}
+
+.card {
+    background: white;
+    border-radius: .5em;
+    padding: 10px 15px;
+    box-shadow: var(--card-drop-shadow);
+}
+
+.breadcrumbs {
+    padding: 10px 20px;
 }
