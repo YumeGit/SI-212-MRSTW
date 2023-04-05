@@ -2,7 +2,7 @@
     --orange1: #f9b433;
     --orange2: #ff6f39;
     --ink: #20242c;
-    --card-drop-shadow: 0px 0px 10px rgba(0,0,0,.05);
+    --card-drop-shadow: 0px 0px 10px rgba(0, 0, 0, .03);
 }
 
 a {
@@ -22,7 +22,7 @@ header {
     padding: 20px 40px;
     background-color: white;
     box-shadow: var(--card-drop-shadow);
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .header_container {
@@ -31,13 +31,17 @@ header {
 }
 
 .container {
-    max-width: 1050px;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
 }
 
 .header_column {
     display: flex;
+}
+
+a.display_contents {
+    display: contents;
 }
 
 .header_logotype {
@@ -74,6 +78,11 @@ header {
     -webkit-background-clip: text;
 }
 
+.header_element {
+    display: flex;
+    align-items: center;
+}
+
 .header_navigation ul {
     display: flex;
 }
@@ -107,7 +116,7 @@ header {
     margin-left: 15px;
 }
 
-button {
+.button {
     padding: 5px 13px;
     cursor: pointer;
     font-family: "Poppins", sans-serif;
@@ -120,28 +129,28 @@ button {
     border: 2px solid transparent;
 }
 
-button:hover {
+.button:hover {
     transform: translateY(-1px);
 }
 
-button:active{
+.button:active {
     transform: translateY(0px);
 }
 
-button.primary {
+.button.primary {
     background: var(--orange2);
     color: white;
 }
 
-button.primary:hover {
+.button.primary:hover {
     filter: brightness(1.05);
 }
 
-button.primary:active {
+.button.primary:active {
     filter: brightness(0.99);
 }
 
-button.secondary {
+.button.secondary {
     color: var(--orange2);
     border-color: var(--orange2);
     font-size: 15px;
@@ -152,8 +161,10 @@ button.secondary {
     border-radius: .5em;
     padding: 10px 15px;
     box-shadow: var(--card-drop-shadow);
+    box-sizing: border-box;
 }
 
 .breadcrumbs {
-    padding: 10px 20px;
+    padding: 10px 25px;
+    font-weight: bold;
 }

@@ -1,14 +1,41 @@
 ﻿@model List<MRSTW.Domain.Entities.Post>
-@{
-    ViewBag.Title = "Index";
-}
 
 @section Styles
 {
-    <link rel="stylesheet" href="~/Content/styles/Post.css" />
+    <link rel="stylesheet" href="~/Content/styles/Home.css" />
 }
 
-@foreach (var post in Model)
-{
-    @Html.Partial("_ShortPost", post)
-}
+<div class="home_layout">
+    <div class="home_primary_post_container">
+
+        <a href="/">
+            <div class="post primary card">
+                <div class="thumbnail">
+                    <img src="https://cdn.discordapp.com/attachments/699360699582906409/1073532523495297044/IMG_20230209_204159.jpg" />
+                </div>
+                <div class="info">
+                    <div class="title"></div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="home_secondary_post_container">
+
+        <a href="/" class="display_contents">
+            <div class="post secondary card">
+                <div class="thumbnail">
+                    <img src="https://cdn.discordapp.com/attachments/699360699582906409/1056067233383731200/IMG_20221224_073306.jpg" />
+                </div>
+            </div>
+        </a>
+
+        <a href="/" class="display_contents">
+            <div class="post secondary card">
+                <div class="thumbnail">
+                    <img src="https://cdn.discordapp.com/attachments/699360699582906409/1050521834191339624/Portal_with_RTX_Screenshot_2022.12.08_-_23.11.30.75.png" />
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
