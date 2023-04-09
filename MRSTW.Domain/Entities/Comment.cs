@@ -9,6 +9,6 @@ namespace MRSTW.Domain.Entities
 		public string Message { get; set; }
 		public User Author { get; set; }
 		public DateTime Created { get; set; } = DateTime.Now;
-		public ICollection<UserReaction> Reactions { get; set; }
+		public ICollection<Reaction> Reactions { get; set; }
 	}
 }

@@ -9,12 +9,6 @@
     <link rel="stylesheet" href="~/Content/Styles/Post.css" />
 }
 
-@section Breadcrumb
-{
-    &larr; @Html.ActionLink(Model.Name, "Details", new { @id = Model.Id })
-    &larr; Edit
-}
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

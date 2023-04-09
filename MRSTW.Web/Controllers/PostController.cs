@@ -6,6 +6,7 @@ using System;
 using System.Data.Entity;
 using System.Web.Mvc;
 using System.Linq;
+using MRSTW.Filters;
 
 namespace MRSTW.Web.Controllers
 {
@@ -34,6 +35,7 @@ namespace MRSTW.Web.Controllers
 			return View(post);
 		}
 
+		[RequireUserRole(UserRole.Admin)]
 		public ActionResult Edit(int? id)
 		{
 			if (id == null)
@@ -50,6 +52,7 @@ namespace MRSTW.Web.Controllers
 		}
 
 		[HttpPost]
+		[RequireUserRole(UserRole.Admin)]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit([Bind(Include = "Id,Name,Story")] Post post)
 		{
@@ -65,6 +68,7 @@ namespace MRSTW.Web.Controllers
 			return View(post);
 		}
 
+		[RequireUserRole(UserRole.Admin)]
 		public ActionResult Delete(int? id)
 		{
 			if (id == null)
@@ -81,6 +85,7 @@ namespace MRSTW.Web.Controllers
 		}
 
 		[HttpPost]
+		[RequireUserRole(UserRole.Admin)]
 		[ActionName("Delete")]
 		public ActionResult DeleteConfirmed(int? id)
 		{

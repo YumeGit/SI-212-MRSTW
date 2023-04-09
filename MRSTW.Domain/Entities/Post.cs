@@ -12,6 +12,6 @@ namespace MRSTW.Domain.Entities
 		public User Author { get; set; }
 		public DateTime Created { get; set; } = DateTime.Now;
         public List<Comment> Comments { get; set; }
-        public List<UserReaction> Reactions { get; set; }
+        public List<Reaction> Reactions { get; set; }
     }
 }

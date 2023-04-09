@@ -1,11 +1,14 @@
 ﻿using MRSTW.BusinessLogic.Service;
+using MRSTW.Controllers;
+using MRSTW.Web.Extensions;
 using MRSTW.Web.Models;
 using System;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
-	public class AuthController : Controller
+	public class AuthController : BaseBlogController
 	{
 		// GET /Auth/Login
 		public ActionResult Login()
@@ -29,11 +32,20 @@ namespace MRSTW.Web.Controllers
 						Time = DateTime.Now
 					};
 
-					var loginStatus = authService.Login(data);
-					if(loginStatus.Success)
-						return Redirect("/");
+					var loginResp = authService.Login(data);
+					if(loginResp.Success)
+					{
+						var session = loginResp.Entry;
 
-						ModelState.AddModelError("Password", loginStatus.Message);
+						// Create Cookie.
+						var cookie = new HttpCookie(SESSION_COOKIE_NAME, session.Token);
+						cookie.Expires = DateTime.Now.AddDays(1);
+						Response.Cookies.Add(cookie);
+
+						return Redirect("/");
+					}
+
+					ModelState.AddModelError("Password", loginResp.Message);
 				}
 			}
 
@@ -66,13 +78,30 @@ namespace MRSTW.Web.Controllers
 
 					var loginStatus = authService.Register(data);
 					if (loginStatus.Success)
-					{ return Redirect("/"); }
+					{ 
+						return RedirectToAction("Login"); 
+					}
 
 					ModelState.AddModelError("", loginStatus.Message);
 				}
 			}
 
 			return View(form);
+		}
+
+		public ActionResult Logout()
+		{
+			// Clear session cookie.
+			var cookie = Request.Cookies[SESSION_COOKIE_NAME];
+			if(cookie != null)
+			{
+				// Force expire.
+				cookie.Expires = DateTime.Now.AddDays(-1);
+				Response.Cookies.Add(cookie);
+			}
+
+			Session.ClearUser();
+			return Redirect("/");
 		}
 	}
 }

@@ -17,20 +17,37 @@ namespace MRSTW.BusinessLogic.Service
             public DateTime Time { get; set; }
 		}
 
-		public ServiceResponse Login(LoginData data)
+		public EntryServiceResponse<Session> Login(LoginData data)
 		{
 			var passHash = AuthHelper.GeneratePasswordHash(data.Password);
 
 			var user = DbContext.Users.FirstOrDefault(x => x.Email == data.Email && x.PasswordHash == passHash);
 			if (user == null)
-				return Failure("User with this pair not found.");
+				return Failure<EntryServiceResponse<Session>>("User with this pair not found.");
 
 			user.LastIpAddress = data.IpAddress;
 			user.LastLoginTime = data.Time;
 			DbContext.Entry(user).State = EntityState.Modified;
 			DbContext.SaveChanges();
 
-			return Success();
+			//
+			// Create session and store token in Cookie.
+			//
+
+			using (var sessionService = new SessionService())
+			{
+				var session = new Session
+				{
+					Token = AuthHelper.GenerateSessionToken(user.Name),
+					User = user
+				};
+
+				var crResp = sessionService.Create(session);
+				if(!crResp.Success)
+					return Failure<EntryServiceResponse<Session>>(crResp.Message);
+
+				return Entry(session);
+			}
 		}
 
 		public struct RegisterData

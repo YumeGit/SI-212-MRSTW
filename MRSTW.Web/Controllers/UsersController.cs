@@ -1,9 +1,10 @@
 ﻿using MRSTW.BusinessLogic.Service;
+using MRSTW.Controllers;
 using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseBlogController
 	{
 		public ActionResult Index()
 		{

@@ -104,11 +104,9 @@
     <Content Include="Content\Images\Clyde.jpg" />
     <Content Include="Content\Images\photo_2022-06-30_23-49-36.jpg" />
     <Content Include="Content\Images\photo_2023-02-10_21-43-50.jpg" />
-    <Content Include="Content\Styles\Login.css" />
     <Content Include="Content\Styles\Home.css" />
     <Content Include="Content\Styles\Main.css" />
     <Content Include="Content\Styles\Post.css" />
-    <Content Include="Content\Styles\Registrarion.css" />
     <Content Include="Content\Styles\Shared.css" />
     <Content Include="Global.asax" />
     <Content Include="Views\Auth\Login.cshtml" />
@@ -122,6 +120,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Extensions\SessionExtensions.cs" />
+    <Compile Include="Filters\SessionUserRoleFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

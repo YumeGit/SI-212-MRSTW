@@ -1,4 +1,6 @@
-﻿<header>
+﻿@using MRSTW.Web.Extensions
+
+<header>
     <div class="container header_container">
         <div class="header_column">
             <a href="@Url.Action("/", "")" class="display_contents">
@@ -18,12 +20,31 @@
                 </ul>
             </div>
             <div class="header_login">
-                <a href="@Url.Action("Login", "Auth")">
-                    <div class="button secondary">Sign In</div>
-                </a>
-                <a href="@Url.Action("Register", "Auth")">
-                    <div class="button primary">Sign Up</div>
-                </a>
+                @if (Session.IsUserLoggedIn())
+                { 
+                    <div class="avatar">
+                        @if(!string.IsNullOrEmpty(ViewBag.SessionUser.Avatar))
+                        { 
+                            <img src="@ViewBag.SessionUser.Avatar" />
+                        }
+                    </div>
+                    <div class="user_info">
+                        <div class="user_name">@ViewBag.SessionUser.Name</div>
+                        <div class="user_desc">
+                            @ViewBag.SessionUser.Role •
+                            @Html.ActionLink("Logout", "Logout", "Auth")
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Auth")">
+                        <div class="button secondary">Sign In</div>
+                    </a>
+                    <a href="@Url.Action("Register", "Auth")">
+                        <div class="button primary">Sign Up</div>
+                    </a>
+                }
             </div>
         </div>
     </div>

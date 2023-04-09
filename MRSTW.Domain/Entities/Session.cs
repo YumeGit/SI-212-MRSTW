@@ -1,9 +1,9 @@
 ﻿namespace MRSTW.Domain.Entities
 {
-	public class UserReaction
+	public class Session
 	{
 		public int Id { get; set; }
+		public string Token { get; set; }
 		public User User { get; set; }
-		public string Emoji { get; set; }
 	}
 }
