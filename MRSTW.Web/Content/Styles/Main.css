@@ -203,3 +203,20 @@ footer {
     text-align: center;
     margin-top: 30px;
 }
+
+.posts_grid {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.posts_grid .post {
+    padding: 0;
+}
+
+.posts_grid .post .thumbnail {
+    position: relative;
+
+}
+

@@ -156,7 +156,6 @@ namespace MRSTW.Web.Controllers
 						Time = DateTime.Now
 					};
 
-
 					{
 						var comResp = commentsService.AddToPost(post, data);
 						if(!comResp.Success)

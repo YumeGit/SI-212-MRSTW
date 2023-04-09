@@ -16,22 +16,19 @@
 }
 
 .post.primary {
-    height: 100%;
     position: relative;
-    min-height: 600px;
+    height: 400px;
     overflow: hidden;
 }
 
-.post.primary .thumbnail {
-    position: absolute;
-    left: 0;
-    top: 0;
+.post .thumbnail {
     width: 100%;
     height: 100%;
-    background-color: green;
+    background-color: #e1e1e1;
+    overflow: hidden;
 }
 
-.post.primary .thumbnail img {
+.post .thumbnail img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -50,24 +47,9 @@
     overflow: hidden;
 }
 
-.post .thumbnail {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.post.secondary .thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-}
-
 .home_layout .post {
     transition: all .2s ease;
+    padding: 0;
 }
 
 .home_layout .post:hover {

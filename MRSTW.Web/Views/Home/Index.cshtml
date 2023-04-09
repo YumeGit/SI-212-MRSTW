@@ -8,7 +8,7 @@
 <div class="home_layout">
     <div class="home_primary_post_container">
 
-        <a href="/">
+        <a href="/Post/Details/1">
             <div class="post primary card">
                 <div class="thumbnail">
                     <img src="https://cdn.discordapp.com/attachments/699360699582906409/1073532523495297044/IMG_20230209_204159.jpg" />
@@ -38,4 +38,18 @@
             </div>
         </a>
     </div>
+</div>
+
+<div class="posts_grid">
+    @for (var i = 0; i < 5; i++)
+    {
+        <div class="post card">
+            <div class="thumbnail">
+                <img src="https://cdn.discordapp.com/attachments/699360699582906409/1073532523495297044/IMG_20230209_204159.jpg"/>
+            </div>
+            <div class="content">
+                <div class="title">Meow Meow Meow</div>
+            </div>
+        </div>
+    }
 </div>
