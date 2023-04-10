@@ -1,4 +1,4 @@
-﻿@model List<MRSTW.Domain.Entities.Post>
+﻿@model MRSTW.Web.Models.HomePageView
 
 @section Styles
 {
@@ -7,49 +7,31 @@
 
 <div class="home_layout">
     <div class="home_primary_post_container">
-
-        <a href="/Post/Details/1">
-            <div class="post primary card">
-                <div class="thumbnail">
-                    <img src="https://cdn.discordapp.com/attachments/699360699582906409/1073532523495297044/IMG_20230209_204159.jpg" />
-                </div>
-                <div class="info">
-                    <div class="title"></div>
-                </div>
-            </div>
-        </a>
+        @Html.Partial("_PostPrimary", Model.Posts.FirstOrDefault())
     </div>
 
     <div class="home_secondary_post_container">
 
-        <a href="/" class="display_contents">
-            <div class="post secondary card">
-                <div class="thumbnail">
-                    <img src="https://cdn.discordapp.com/attachments/699360699582906409/1056067233383731200/IMG_20221224_073306.jpg" />
-                </div>
-            </div>
-        </a>
+        @Html.Partial("_PostSecondary", Model.Posts.Skip(1).FirstOrDefault())
+        @Html.Partial("_PostSecondary", Model.Posts.Skip(2).FirstOrDefault())
 
-        <a href="/" class="display_contents">
-            <div class="post secondary card">
-                <div class="thumbnail">
-                    <img src="https://cdn.discordapp.com/attachments/699360699582906409/1050521834191339624/Portal_with_RTX_Screenshot_2022.12.08_-_23.11.30.75.png" />
-                </div>
-            </div>
-        </a>
     </div>
 </div>
 
-<div class="posts_grid">
+<div class="categories">
     @for (var i = 0; i < 5; i++)
     {
-        <div class="post card">
-            <div class="thumbnail">
-                <img src="https://cdn.discordapp.com/attachments/699360699582906409/1073532523495297044/IMG_20230209_204159.jpg"/>
+        <a href="/Category/ASD" class="display_contents">
+            <div class="category">
+                Category @(i+1)
             </div>
-            <div class="content">
-                <div class="title">Meow Meow Meow</div>
-            </div>
-        </div>
+        </a>
+    }
+</div>
+
+<div class="posts_grid">
+    @foreach (var post in Model.Posts.Skip(3))
+    {
+        @Html.Partial("_PostCard", post)
     }
 </div>

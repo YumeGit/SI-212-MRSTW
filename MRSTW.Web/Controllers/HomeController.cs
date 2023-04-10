@@ -1,5 +1,7 @@
 ﻿using MRSTW.BusinessLogic.Service;
 using MRSTW.Controllers;
+using MRSTW.Web.Models;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace MRSTW.Web
@@ -10,8 +12,16 @@ namespace MRSTW.Web
 		{
 			using (var posts = new PostService())
 			{
-				var allPosts = posts.GetAll();
-				return View(allPosts.Entries);
+				var postsResp = posts.GetAll();
+				if(!postsResp.Success)
+					return HttpNoPermission();
+
+				var vm = new HomePageView
+				{
+					Posts = postsResp.Entries.ToList()
+				};
+
+				return View(vm);
 			}
 		}
 	}

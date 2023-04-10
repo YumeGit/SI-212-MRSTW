@@ -1,0 +1,13 @@
+﻿@model MRSTW.Domain.Entities.Post
+
+<a href="@Url.Action("Details", "Post", new { id = Model.Id })">
+    <div class="post primary card">
+        <div class="thumbnail">
+            <div class="category">MEOW</div>
+            <img src="@Model.Thumbnail" />
+        </div>
+        <div class="info">
+            @Model.Name
+        </div>
+    </div>
+</a>

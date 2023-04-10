@@ -9,6 +9,7 @@ namespace MRSTW.Domain.Entities
 		public string Name { get; set; }
 		public string Story { get; set; }
 		public int Views { get; set; }
+		public string Thumbnail { get; set; }
 		public User Author { get; set; }
 		public DateTime Created { get; set; } = DateTime.Now;
         public List<Comment> Comments { get; set; }

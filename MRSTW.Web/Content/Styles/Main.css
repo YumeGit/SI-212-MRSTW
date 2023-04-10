@@ -15,7 +15,7 @@ body {
     margin: 0;
     color: #20242c;
     font-family: "Poppins", sans-serif;
-    background-color: #F6F6F6;
+    background-color: #E0E0E0;
 }
 
 header {
@@ -31,7 +31,7 @@ header {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
     width: 100%;
     margin: 0 auto;
 }

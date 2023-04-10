@@ -1,0 +1,16 @@
+﻿@model MRSTW.Domain.Entities.Post
+
+<a href="@Url.Action("Details", "Post", new { id = Model.Id })" class="display_contents">
+    <div class="post card">
+        <div class="thumbnail">
+            <div class="category">MEOW</div>
+            <img src="@Model.Thumbnail" />
+        </div>
+
+        <div class="content">
+            <div class="title">@Model.Name</div>
+            <div class="meta">By @Model.Author.Name from @Model.Created.ToShortDateString()</div>
+            <div class="story">@string.Join(" ", @Model.Story.Split(' ').Take(10))...</div>
+        </div>
+    </div>
+</a>
