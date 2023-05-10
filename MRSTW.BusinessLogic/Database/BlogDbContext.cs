@@ -12,6 +12,7 @@ namespace MRSTW.BusinessLogic.Database
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<Reaction> Reactions { get; set; }
-		public DbSet<Session> Sessions { get; set; }
-	}
+        public DbSet<Session> Sessions { get; set; }
+        public DbSet<Category> Categories { get; set; }
+    }
 }

@@ -1,11 +1,10 @@
-﻿using MRSTW.BusinessLogic.Database;
-using MRSTW.Domain.Entities;
+﻿using MRSTW.Domain.Entities;
 using System.Data.Entity;
 using System.Linq;
 
 namespace MRSTW.BusinessLogic.Service
 {
-	public class PostService : Service
+    public class PostService : Service
 	{
 		public EntryServiceResponse<Post> GetById(int id)
 		{
