@@ -1,0 +1,22 @@
+﻿@using MRSTW.Web.Extensions
+
+@{
+    var sessionUser = Session.GetUser();
+}
+
+@if (sessionUser != null)
+{
+    <div class="comment_outer post_leave_a_comment @((ViewData["Hidden"] is true) ? "hidden" : "")">
+        <div class="comment_avatar">
+            <img src="@sessionUser.Avatar" />
+        </div>
+        <div class="comment_content">
+            <textarea placeholder="Leave a comment..."></textarea>
+        </div>
+        <div class="comment_post_button">
+            <div class="button primary">
+                <i class="mdi mdi-send"></i>
+            </div>
+        </div>
+    </div>
+}

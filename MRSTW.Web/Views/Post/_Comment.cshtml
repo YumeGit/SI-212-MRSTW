@@ -1,6 +1,6 @@
 ﻿@model MRSTW.Domain.Entities.Comment
 
-<div class="card">
+<div class="comment_outer">
     <div class="comment_inner">
         <div class="comment_avatar">
             <img src="@Model.Author.Avatar" />
@@ -12,13 +12,18 @@
             </div>
             <div class="message">@Model.Message</div>
             <div class="comment_footer">
-                <div>Reply</div>
+                <div>
+                    <a href="javascript:void(0)" onclick="">
+                        <i class="mdi mdi-reply"></i>
+                        Reply
+                    </a>
+                </div>
                 <div class="reactions">
 
                     @foreach(var reaction in Model.Reactions)
                     {
                         <div class="reaction">
-                            <div class="emoji">@reaction.Emoji</div>
+                            <div class="emoji">@Html.Raw(@reaction.Emoji)</div>
                             <div class="count">1</div>
                         </div>
                     }
@@ -34,12 +39,12 @@
     @if (Model.Comments != null)
     {
         <div class="comment_thread">
+            @Html.Partial("_CommentEditor", Model, new ViewDataDictionary(){ ["Hidden"] = true })
 
-        @foreach (var comment in Model.Comments)
-        {
-            @Html.Partial("_Comment", comment);
-        }
-
+            @foreach (var comment in Model.Comments)
+            {
+                @Html.Partial("_Comment", comment);
+            }
         </div>
     }
 </div>

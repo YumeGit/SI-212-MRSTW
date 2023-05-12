@@ -3,6 +3,7 @@
     --orange2: #ff6f39;
     --ink: #20242c;
     --card-drop-shadow: 0px 0px 10px rgba(0, 0, 0, .03);
+    --background: #E0E0E0;
 }
 
 a {
@@ -15,7 +16,7 @@ body {
     margin: 0;
     color: #20242c;
     font-family: "Poppins", sans-serif;
-    background-color: #E0E0E0;
+    background-color: var(--background);
 }
 
 header {
@@ -223,3 +224,11 @@ footer {
     position: relative;
 }
 
+textarea,
+input {
+    font-family: Poppins, sans-serif;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    resize: none;
+    border-radius: .5em;
+}

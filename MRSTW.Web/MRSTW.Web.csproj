@@ -153,6 +153,7 @@
     <Content Include="Views\Home\_PostPrimary.cshtml" />
     <Content Include="Views\Home\_PostSecondary.cshtml" />
     <Content Include="Views\Home\_Category.cshtml" />
+    <Content Include="Views\Post\_CommentEditor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
