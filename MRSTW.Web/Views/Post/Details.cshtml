@@ -11,50 +11,43 @@ ViewBag.Title = Model.Name;
 }
 
 <div class="post_thumb">
-    <div class="post_thumb_inner">
-        <img src="@Model.Thumbnail" />
-    </div>
+     <img src="@Model.Thumbnail" />
 </div>
 
 
-<h1>@Model.Name</h1>
-<div>
-    <small>
-        By @Model.Author.Name -
-        from @Model.Created.ToShortDateString()
-    </small>
-</div>
-
-@if (Session.UserHasRole(MRSTW.Domain.Entities.UserRole.Admin))
-{
-    <div>
-        <small>
-            <a href="@Url.Action("Edit", "Post", new { id = Model.Id })">[Редактировать]</a>
-            <a href="@Url.Action("Delete", "Post", new { id = Model.Id })">[Удалить]</a>
-        </small>
-    </div>
-}
-
-<div class="post_content">
-    @Model.Story
-</div>
-
-<div class="react_container">
-    @{
-        var emojis = Model.Reactions.GroupBy(x => x.Emoji);
-    }
-
-    @foreach (var emoji in emojis)
-    {
-        <div class="react">
-            <div class="reactors">
-                @string.Join(", ", emoji.Select(x => x.User.Name)) reacted with @Html.Raw(@emoji.Key)
-            </div>
-            @Html.Raw(@emoji.Key) @emoji.Count()
+<div class="post_container">
+    <div class="post_content">
+        <div class="post_title">@Model.Name</div>
+        <div class="post_story">
+            @Model.Story
         </div>
-    }
-</div>
-
-<div>
-    @Html.ActionLink($"[ {Model.Comments.Count} Comments ]", "Comments", new { id = Model.Id })
+        @if (Model.Comments != null)
+        {
+            <div class="post_comments">
+                @foreach (var comment in Model.Comments)
+                {
+                    @Html.Partial("_Comment", comment)
+                }
+            </div>
+        }
+    </div>
+    <div class="post_author">
+        <div class="card" style="background-image: url(@Model.Author.Avatar)">
+            <div class="card">
+                <div class="author_label">Written by</div>
+                <div class="author_avatar">
+                    <img src="@Model.Author.Avatar" />
+                </div>
+                <div class="author_name">
+                    @Model.Author.Name
+                </div>
+            </div>
+        </div>
+        <a href="@Url.Action("Edit", new { Id = Model.Id })">
+            <div class="button secondary">Edit</div>
+        </a>
+        <a href="@Url.Action("Delete", new { Id = Model.Id })">
+            <div class="button secondary">Delete</div>
+        </a>
+    </div>
 </div>

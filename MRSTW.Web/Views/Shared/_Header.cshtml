@@ -13,8 +13,15 @@
         <div class="header_column">
             <div class="header_navigation">
                 <ul>
-                    <li>Catergory #1</li>
-                    <li>Catergory #2</li>
+                    <a href="@Url.Action("", "")">
+                        <li>Home</li>
+                    </a>
+                    <a href="@Url.Action("About", "Static")">
+                        <li>About</li>
+                    </a>
+                    <a href="@Url.Action("Memes", "Static")">
+                        <li>Memes</li>
+                    </a>
                 </ul>
             </div>
             <div class="header_login">

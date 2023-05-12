@@ -3,7 +3,7 @@
 	public class Reaction
 	{
 		public int Id { get; set; }
-		public User User { get; set; }
+		public User Author { get; set; }
 		public string Emoji { get; set; }
 	}
 }

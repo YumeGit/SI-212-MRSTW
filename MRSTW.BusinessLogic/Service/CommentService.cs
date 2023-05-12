@@ -20,7 +20,7 @@ namespace MRSTW.BusinessLogic.Service
 
             var comments = DbContext.Entry(post)
                 .Collection(x => x.Comments).Query()
-                .Include(x => x.Reactions.Select(y => y.User))
+                .Include(x => x.Reactions.Select(y => y.Author))
                 .Include(x => x.Author)
                 .OrderByDescending(x => x.Created)
                 .ToList();

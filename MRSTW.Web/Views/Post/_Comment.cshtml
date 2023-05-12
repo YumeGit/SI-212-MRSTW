@@ -1,28 +1,29 @@
 ﻿@model MRSTW.Domain.Entities.Comment
 
-<div class="comment">
-    <div class="title">
-        @Model.Author.Name
-        <span>at @Model.Created.ToShortDateString() @Model.Created.ToShortTimeString()</span>
+<div class="card">
+    <div class="comment_inner">
+        <div class="comment_avatar">
+            <img src="@Model.Author.Avatar" />
+        </div>
+        <div class="comment_content">
+            <div class="comment_author">
+                <div class="comment_author_name">@Model.Author.Name</div>
+                <div class="comment_author_time">@Model.Created.ToShortDateString()</div>
+            </div>
+            <div class="message">@Model.Message</div>
+
+        </div>
     </div>
-    <div class="message">@Model.Message</div>
 
-    @if (Model.Reactions != null)
+    @if (Model.Comments != null)
     {
-        <div class="react_container">
-            @{
-                var emojis = Model.Reactions.GroupBy(x => x.Emoji);
+        <div class="comment_thread">
+
+            @foreach (var comment in Model.Comments)
+            {
+                @Html.Partial("_Comment", comment);
             }
 
-            @foreach (var emoji in emojis)
-            {
-                <div class="react">
-                    <div class="reactors">
-                        @string.Join(", ", emoji.Select(x => x.User.Name)) reacted with @Html.Raw(@emoji.Key)
-                    </div>
-                    @Html.Raw(@emoji.Key) @emoji.Count()
-                </div>
-            }
         </div>
     }
 </div>

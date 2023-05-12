@@ -1,6 +1,7 @@
 ﻿using MRSTW.Domain.Entities;
 using System.Data.Entity;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace MRSTW.BusinessLogic.Service
 {
@@ -11,11 +12,32 @@ namespace MRSTW.BusinessLogic.Service
             var post = DbContext.Posts
                 .Include(x => x.Author)
                 .Include(x => x.Comments)
-                .Include(x => x.Reactions.Select(y => y.User))
                 .First(x => x.Id == id);
+
+            if (post == null) 
+                return Entry(post);
+
+            // Recursively load comment threads
+            if (post.Comments != null)
+            {
+                foreach (var comment in post.Comments)
+                    RecursivelyLoadRelatedComments(comment);
+            }
 
             return Entry(post);
 	    }
+
+		private void RecursivelyLoadRelatedComments(Comment comment)
+        {
+            DbContext.Entry(comment).Reference("Author").Load();
+            DbContext.Entry(comment).Collection("Reactions").Load();
+            DbContext.Entry(comment).Collection("Comments").Load();
+
+            foreach(var comment2 in comment.Comments)
+            {
+                RecursivelyLoadRelatedComments(comment2);
+            }
+        }
 
         public EntriesServiceResponse<Post> GetAll()
         {
