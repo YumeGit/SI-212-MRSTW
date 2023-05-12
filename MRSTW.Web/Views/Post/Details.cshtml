@@ -2,13 +2,20 @@
 @using MRSTW.Web.Extensions
 
 @{
-    ViewBag.Title = Model.Name;
+ViewBag.Title = Model.Name;
 }
 
 @section Styles
 {
-    <link rel="stylesheet" href="~/Content/styles/Post.css" />
+<link rel="stylesheet" href="~/Content/styles/Post.css" />
 }
+
+<div class="post_thumb">
+    <div class="post_thumb_inner">
+        <img src="@Model.Thumbnail" />
+    </div>
+</div>
+
 
 <h1>@Model.Name</h1>
 <div>

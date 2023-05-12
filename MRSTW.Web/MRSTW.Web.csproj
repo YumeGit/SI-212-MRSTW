@@ -121,7 +121,7 @@
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
-    <Compile Include="Filters\SessionUserRoleFilter.cs" />
+    <Compile Include="Filters\RequireUserRoleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -152,6 +152,7 @@
     <Content Include="Views\Home\_PostCard.cshtml" />
     <Content Include="Views\Home\_PostPrimary.cshtml" />
     <Content Include="Views\Home\_PostSecondary.cshtml" />
+    <Content Include="Views\Home\_Category.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

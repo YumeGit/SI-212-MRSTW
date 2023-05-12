@@ -19,13 +19,9 @@
 </div>
 
 <div class="categories">
-    @for (var i = 0; i < 5; i++)
+    @foreach (var category in Model.Categories)
     {
-        <a href="/Category/ASD" class="display_contents">
-            <div class="category">
-                Category @(i+1)
-            </div>
-        </a>
+        @Html.Partial("_Category", category)
     }
 </div>
 

@@ -10,19 +10,24 @@ namespace MRSTW.Web
 	{
 		public ActionResult Index()
 		{
-			using (var posts = new PostService())
+			var posts = new PostService();
+			var categories = new CategoryService();
+
+            var postsResp = posts.GetAll();
+            if (!postsResp.Success)
+                return HttpNoPermission();
+
+            var categoryResp = categories.GetAll();
+            if (!categoryResp.Success)
+                return HttpNoPermission();
+
+            var vm = new HomePageView
 			{
-				var postsResp = posts.GetAll();
-				if(!postsResp.Success)
-					return HttpNoPermission();
+				Posts = postsResp.Entries.ToList(),
+				Categories = categoryResp.Entries.ToList()
+            };
 
-				var vm = new HomePageView
-				{
-					Posts = postsResp.Entries.ToList()
-				};
-
-				return View(vm);
-			}
+			return View(vm);
 		}
 	}
 }

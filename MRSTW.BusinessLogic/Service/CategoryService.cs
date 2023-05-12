@@ -4,15 +4,23 @@ using System.Linq;
 
 namespace MRSTW.BusinessLogic.Service
 {
-    public class CategoryService : Service
-	{
-		public EntryServiceResponse<Category> GetById(int id)
-		{
+	public class CategoryService : Service
+    {
+        public EntryServiceResponse<Category> GetById(int id)
+        {
             var post = DbContext.Categories
-                .First(x => x.Id == id);
+                .FirstOrDefault(x => x.Id == id);
 
             return Entry(post);
-	}
+        }
+
+        public EntryServiceResponse<Category> GetByName(string name)
+        {
+            var post = DbContext.Categories
+                .FirstOrDefault(x => x.Name == name);
+
+            return Entry(post);
+        }
 
         public EntriesServiceResponse<Category> GetAll()
         {

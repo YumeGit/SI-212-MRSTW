@@ -6,8 +6,8 @@ namespace MRSTW.BusinessLogic.Service
 {
     public class PostService : Service
 	{
-		public EntryServiceResponse<Post> GetById(int id)
-		{
+	    public EntryServiceResponse<Post> GetById(int id)
+	    {
             var post = DbContext.Posts
                 .Include(x => x.Author)
                 .Include(x => x.Comments)
@@ -15,12 +15,13 @@ namespace MRSTW.BusinessLogic.Service
                 .First(x => x.Id == id);
 
             return Entry(post);
-	}
+	    }
 
         public EntriesServiceResponse<Post> GetAll()
         {
             var posts = DbContext.Posts
                 .Include(x => x.Author)
+                .Include(x => x.Category)
                 .OrderByDescending(x => x.Created)
                 .ToList();
 
