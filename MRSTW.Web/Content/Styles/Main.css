@@ -28,6 +28,9 @@ header {
 .header_container {
     display: flex;
     justify-content: space-between;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .container {
@@ -97,6 +100,7 @@ a.display_contents {
     cursor: pointer;
     transition: all .2s ease;
     padding: 5px 10px;
+    color: black;
 }
 
 
@@ -217,6 +221,5 @@ footer {
 
 .posts_grid .post .thumbnail {
     position: relative;
-
 }
 

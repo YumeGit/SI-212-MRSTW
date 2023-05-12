@@ -8,14 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
 
-        <title>@(string.IsNullOrEmpty(ViewBag.Title) ? ViewBag.SiteName : $"{ViewBag.Title} - {ViewBag.SiteName}")</title>
-
-    <!-- Page Styles-->
-    @RenderSection("Styles", false)
+    <title>@(string.IsNullOrEmpty(ViewBag.Title) ? ViewBag.SiteName : $"{ViewBag.Title} - {ViewBag.SiteName}")</title>
 
     <!-- Internal Fonts -->
     <link rel="stylesheet" href="~/Content/Styles/Main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" />
+    
+    <!-- Page Styles-->
+    @RenderSection("Styles", false)
+
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

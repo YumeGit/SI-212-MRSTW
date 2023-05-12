@@ -92,6 +92,43 @@ namespace MRSTW.BusinessLogic.Database
                                 }
                             }
                         }
+                    },
+                    new Comment()
+                    {
+                        Message = "Хей народ на связи Мунли",
+                        Author = moonlydays,
+                        Comments = new List<Comment>()
+                        {
+                            new Comment()
+                            {
+                                Message = "И сегодня у нас обзор на шестую лабу по вебу",
+                                Author = yume,
+                                Comments = new List<Comment>()
+                                {
+                                    new Comment()
+                                    {
+                                        Message = "Во первых у нас есть ебейшие комментарии",
+                                        Author = dimka,
+                                        Comments = new List<Comment>()
+                                        {
+                                            new Comment()
+                                            {
+                                                Message = "И на них можно оставлять ебейшие реакции",
+                                                Author = xen,
+                                                Reactions = new List<Reaction>()
+                                                {
+                                                    new Reaction()
+                                                    {
+                                                        Author = yume,
+                                                        Emoji = "😲"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             });

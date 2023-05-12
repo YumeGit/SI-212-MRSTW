@@ -107,6 +107,7 @@
 
 .post_story {
     text-align: justify;
+    margin-bottom: 40px;
 }
 
 .post_author {
@@ -118,13 +119,14 @@
     flex-direction: column;
 }
 
-.post_author > .card {
+.profile_banner {
     padding: 0;
     background-size: cover;
     background-position: center;
 }
 
-.post_author > .card > .card {
+.author_profile {
+    padding: 10px;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -164,9 +166,16 @@
     margin-top: -30px;
 }
 
+.card_post_manage {
+    padding: 0;
+    overflow: hidden;
+}
+
+.post_manage_content {
+    padding: 15px;
+}
+
 /* ----------------- COMMENT ----------------- */
-
-
 .comment {
     border-radius: 3px;
     display: flex;
@@ -211,6 +220,64 @@
 .comment_thread .comment {
     padding: 0;
 }
+
 .comment_inner {
     display: flex;
+}
+
+.comment_footer {
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    gap: 6px;
+}
+
+.reaction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F0F0F0;
+    border-radius: 10px;
+    padding: 0px 7px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+}
+
+.reaction .count {
+    margin-left: 3px;
+    color: #333;
+}
+
+.reaction:hover {
+    border-color: #CCC;
+}
+
+.reaction:active {
+    background-color: #C0C0C0;
+}
+
+.reaction.selected {
+    background-color: var(--orange1);
+}
+
+.reaction.selected:hover {
+    border-color: var(--orange2);
+}
+
+.reaction.selected:active {
+    background-color: var(--orange2);
+}
+
+.post_manage_section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.post_manage_section:not(:last-child) {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #CCC;
+    margin-bottom: 15px;
 }
