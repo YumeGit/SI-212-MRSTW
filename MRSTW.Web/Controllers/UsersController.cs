@@ -1,32 +1,55 @@
 ﻿using MRSTW.BusinessLogic.Service;
 using MRSTW.Controllers;
+using MRSTW.Domain.Entities;
+using MRSTW.Filters;
 using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
     public class UsersController : BaseBlogController
-	{
-		public ActionResult Index()
+    {
+        UserService Users = new UserService();
+
+        public ActionResult Index()
 		{
-			using (var users = new UserService())
-			{
-				var allUsers = users.GetAll();
-				return View(allUsers.Entries);
-			}
+			var allUsers = Users.GetAll();
+            if (!allUsers.Success)
+                return HttpNoPermission();
+
+			return View(allUsers.Entries);
 		}
-#if false
 
         // GET: Users/Details/5
+        [RequireUserRole(UserRole.Admin)]
         public ActionResult Details(int? id)
         {
-            User user = db.Users.Find(id);
+            var userResp = Users.GetById(id.Value);
+            if(!userResp.Success)
+                return HttpNoPermission();
+
+            var user = userResp.Entry;
             if (user == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(user);
         }
+
+        // GET: Users/Edit/5
+        [RequireUserRole(UserRole.Admin)]
+        public ActionResult Edit(int? id)
+        {
+            var userResp = Users.GetById(id.Value);
+            if (!userResp.Success)
+                return HttpNoPermission();
+
+            var user = userResp.Entry;
+            if (user == null)
+                return HttpNotFound();
+
+            return View(user);
+        }
+
+#if false
 
         // GET: Users/Create
         public ActionResult Create()
@@ -51,16 +74,6 @@ namespace MRSTW.Web.Controllers
             return View(user);
         }
 
-        // GET: Users/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
 
         // POST: Users/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
@@ -110,5 +123,5 @@ namespace MRSTW.Web.Controllers
             base.Dispose(disposing);
         }
 #endif
-	}
+    }
 }

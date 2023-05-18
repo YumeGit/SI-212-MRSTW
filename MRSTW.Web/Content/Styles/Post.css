@@ -126,6 +126,7 @@
 .post_story {
     text-align: justify;
     margin-bottom: 20px;
+    white-space: pre-line;
 }
 
 .post_author {
@@ -196,6 +197,9 @@
     padding: 15px;
 }
 
+.post_reactions {
+    margin-bottom: 20px;
+}
 
 /* ----------------- COMMENT ----------------- */
 .comment_outer {
@@ -277,6 +281,11 @@
     justify-content: center;
 }
 
+
+.comment_reply_spoiler:not(.visible) {
+    display: none;
+}
+
 .reaction {
     display: flex;
     align-items: center;
@@ -345,6 +354,7 @@
 
 .post_leave_a_comment {
     display: flex;
+    min-height: 25px;
 }
 
 .post_leave_a_comment textarea {

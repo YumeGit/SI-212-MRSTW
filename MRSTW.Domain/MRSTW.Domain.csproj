@@ -8,4 +8,8 @@
     <ProjectReference Include="..\MRSTW.Helpers\MRSTW.Helpers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Data.Entity" />
+  </ItemGroup>
+
 </Project>

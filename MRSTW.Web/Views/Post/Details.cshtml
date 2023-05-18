@@ -2,7 +2,7 @@
 @using MRSTW.Web.Extensions
 
 @{
-ViewBag.Title = Model.Name;
+    ViewBag.Title = Model.Name;
 }
 
 @section Styles
@@ -17,31 +17,37 @@ ViewBag.Title = Model.Name;
 </style>
 
 <div class="post_thumb">
-     <img src="@Model.Thumbnail" />
+    <img src="@Model.Thumbnail" />
 </div>
 
 <div class="post_backdrop">
     <div class="post_backdrop_blur">
 
-        <div class="post_container">
+        <div class="post_container">    
             <div class="post_content">
 
                 <div class="post_title">@Model.Name</div>
                 <div class="post_story">@Model.Story</div>
 
+                <div class="post_reactions">
+                    @Html.Partial("_Reactions", Model)
+                </div>
 
-                @if (Model.Comments.Count > 0)
-                {
-                    <div class="card post_comments">
+                <div class="card post_comments">
+                    @Html.Partial("_CommentEditor", null, new ViewDataDictionary
+                    {
+                        ["Type"] = "Post",
+                        ["TargetId"] = Model.Id
+                    })
 
-                        @Html.Partial("_CommentEditor")
-
-                        @foreach (var comment in Model.Comments)
+                    @if (Model.Comments.Count > 0)
+                    {
+                        foreach (var comment in Model.Comments)
                         {
                             @Html.Partial("_Comment", comment)
                         }
-                    </div>
-                }
+                    }
+                </div>
             </div>
             <div class="post_author">
                 <div class="card card_post_manage">
@@ -87,3 +93,16 @@ ViewBag.Title = Model.Name;
         </div>
     </div>
 </div>
+
+<script>
+    function OpenReplyEditor(comment_id) {
+
+        for (var el of document.querySelectorAll(".comment_reply_spoiler")) {
+
+            if (el.getAttribute("data-id") == comment_id)
+                el.classList.add("visible");
+            else
+                el.classList.remove("visible");
+        }
+    }
+</script>

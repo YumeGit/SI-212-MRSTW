@@ -1,0 +1,16 @@
+﻿@model MRSTW.Domain.Interfaces.IHasReactions
+
+<div class="reactions">
+
+    @foreach (var reaction in Model.Reactions)
+    {
+        <div class="reaction">
+            <div class="emoji">@Html.Raw(@reaction.Emoji)</div>
+            <div class="count">1</div>
+        </div>
+    }
+
+    <div class="reactions_buttons">
+        <div class="reaction">+</div>
+    </div>
+</div>

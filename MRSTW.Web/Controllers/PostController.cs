@@ -1,16 +1,13 @@
 ﻿using MRSTW.BusinessLogic.Service;
 using MRSTW.Controllers;
 using MRSTW.Domain.Entities;
-using MRSTW.Web.Models;
-using System;
-using System.Data.Entity;
-using System.Web.Mvc;
-using System.Linq;
 using MRSTW.Filters;
+using MRSTW.Web.Models;
+using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
-	public class PostController : BaseBlogController
+    public class PostController : BaseBlogController
 	{
 		PostService Posts = new PostService();
 
@@ -107,66 +104,11 @@ namespace MRSTW.Web.Controllers
 			return Redirect("/");
 		}
 
-		public ActionResult Comments(int? id)
-		{
-			if (id == null)
-				return HttpNotFound();
-
-			var resp = Posts.GetById(id.Value);
-			if(!resp.Success)
-				return HttpNoPermission();
-
-			var post = resp.Entry;
-			using (var commentsService = new CommentService())
-			{
-				var comResp = commentsService.GetAllFromPost(post);
-				if(!comResp.Success)
-					return HttpNoPermission();
-
-				return View(post);
-			}
-		}
-
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Comments(CommentForm form)
+		public ActionResult PostComment(CommentForm form)
         {
-            var postResp = Posts.GetById(form.PostId);
-            if (!postResp.Success)
-                return HttpNoPermission();
-
-            var post = postResp.Entry;
-            if (post == null)
-                return HttpNotFound();
-
-            if (ModelState.IsValid)
-			{
-				using (var commentsService = new CommentService()) 
-				{
-					{
-						var comResp = commentsService.GetAllFromPost(post);
-						if (!comResp.Success)
-							return HttpNoPermission();
-					}
-
-                    var data = new CommentService.CommentForm()
-					{
-						Message = form.Message,
-						Author = new UserService().GetById(1).Entry,
-						Time = DateTime.Now
-					};
-
-					{
-						var comResp = commentsService.AddToPost(post, data);
-						if(!comResp.Success)
-							return HttpNoPermission();
-					}
-
-					post.Comments = post.Comments.OrderByDescending(x => x.Created).ToList();
-				}
-			}
-
-			return View(post);
+			return View();
         }
 	}
 }

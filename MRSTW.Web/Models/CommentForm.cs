@@ -4,8 +4,9 @@ namespace MRSTW.Web.Models
 {
 	public class CommentForm
 	{
+		public string Type { get; set; }
 		[Required]
-		public int PostId { get; set; }
+		public int TargetId { get; set; }
 		[Required]
 		[MaxLength(100)]
 		public string Message { get; set; }

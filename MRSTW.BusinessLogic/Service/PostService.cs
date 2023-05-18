@@ -12,6 +12,7 @@ namespace MRSTW.BusinessLogic.Service
             var post = DbContext.Posts
                 .Include(x => x.Author)
                 .Include(x => x.Comments)
+                .Include("Reactions.Author")
                 .First(x => x.Id == id);
 
             if (post == null) 
@@ -43,7 +44,6 @@ namespace MRSTW.BusinessLogic.Service
         {
             var posts = DbContext.Posts
                 .Include(x => x.Author)
-                .Include(x => x.Category)
                 .OrderByDescending(x => x.Created)
                 .ToList();
 
@@ -74,5 +74,18 @@ namespace MRSTW.BusinessLogic.Service
 			DbContext.SaveChanges();
 			return Success();
 		}
-	}
+
+        public EntriesServiceResponse<Post> GetAllFromCategory(Category category)
+        {
+            DbContext.Categories.Attach(category);
+
+            var comments = DbContext.Entry(category)
+                .Collection(x => x.Posts).Query()
+                .Include(x => x.Author)
+                .OrderByDescending(x => x.Created)
+                .ToList();
+
+            return Entries(comments);
+        }
+    }
 }

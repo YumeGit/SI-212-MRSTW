@@ -16,12 +16,13 @@
                     <a href="@Url.Action("", "")">
                         <li>Home</li>
                     </a>
-                    <a href="@Url.Action("About", "Static")">
-                        <li>About</li>
-                    </a>
-                    <a href="@Url.Action("Memes", "Static")">
-                        <li>Memes</li>
-                    </a>
+
+                    @if(Session.UserHasRole(MRSTW.Domain.Entities.UserRole.Admin))
+                    {
+                        <a href="@Url.Action("", "Users")">
+                            <li>Admin</li>
+                        </a>
+                    }
                 </ul>
             </div>
             <div class="header_login">

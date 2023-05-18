@@ -7,11 +7,13 @@ namespace MRSTW.BusinessLogic.Service
 {
     public class CommentService : Service
     {
-        public struct CommentForm
+        public EntryServiceResponse<Comment> GetById(int id)
         {
-            public User Author { get; set; }
-            public string Message { get; set; }    
-            public DateTime Time { get; set; }
+            var comment = DbContext.Comments
+                .Include(x => x.Author)
+                .First(x => x.Id == id);
+
+            return Entry(comment);
         }
 
         public EntriesServiceResponse<Comment> GetAllFromPost(Post post)
@@ -28,15 +30,8 @@ namespace MRSTW.BusinessLogic.Service
             return Entries(comments);
         }
 
-        public EntryServiceResponse<Comment> AddToPost(Post post, CommentForm form)
+        public EntryServiceResponse<Comment> AddToPost(Post post, Comment comment)
         {
-            var comment = new Comment
-            {
-                Author = form.Author,
-                Message = form.Message,
-                Created = form.Time
-            };
-
             post.Comments.Add(comment);
             DbContext.SaveChanges();
 

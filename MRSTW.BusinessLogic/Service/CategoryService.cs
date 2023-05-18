@@ -1,6 +1,7 @@
 ﻿using MRSTW.Domain.Entities;
 using System.Data.Entity;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace MRSTW.BusinessLogic.Service
 {
@@ -20,6 +21,15 @@ namespace MRSTW.BusinessLogic.Service
                 .FirstOrDefault(x => x.Name == name);
 
             return Entry(post);
+        }
+
+        public EntryServiceResponse<Category> GetWithPost(Post post)
+        {
+            var cat = DbContext.Categories
+                .Where(x => x.Posts.Contains(post))
+                .FirstOrDefault();
+
+            return Entry(cat);
         }
 
         public EntriesServiceResponse<Category> GetAll()

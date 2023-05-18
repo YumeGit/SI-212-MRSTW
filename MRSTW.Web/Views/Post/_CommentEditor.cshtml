@@ -1,22 +1,37 @@
 ﻿@using MRSTW.Web.Extensions
+@model MRSTW.Web.Models.CommentForm
 
 @{
     var sessionUser = Session.GetUser();
 }
 
-@if (sessionUser != null)
+@using (Html.BeginForm("PostComment", "Post", FormMethod.Post))
 {
-    <div class="comment_outer post_leave_a_comment @((ViewData["Hidden"] is true) ? "hidden" : "")">
-        <div class="comment_avatar">
-            <img src="@sessionUser.Avatar" />
-        </div>
-        <div class="comment_content">
-            <textarea placeholder="Leave a comment..."></textarea>
-        </div>
-        <div class="comment_post_button">
-            <div class="button primary">
-                <i class="mdi mdi-send"></i>
+    @Html.Hidden("Type", ViewData["Type"])
+    @Html.Hidden("TargetId", ViewData["TargetId"])
+    @Html.AntiForgeryToken()
+
+    <div class="comment_outer post_leave_a_comment">
+        @if (sessionUser != null)   
+        {
+            <div class="comment_avatar">
+                <img src="@sessionUser.Avatar" />
             </div>
-        </div>
+            <div class="comment_content">
+                @Html.TextAreaFor(x => x.Message, new { placeholder = "Leave a comment..." })
+            </div>
+            <div class="comment_post_button">
+                <button class="button primary">
+                    <i class="mdi mdi-send"></i>
+                </button>
+            </div>
+        }
+        else
+        {
+            <center>
+                <i class="mdi mdi-alert"></i>
+                Please <a href="/Auth/Login">Sign In</a> or <a href="/Auth/Register">Sign Up</a> to post comments
+            </center>
+        }
     </div>
 }

@@ -1,6 +1,6 @@
 ﻿@model MRSTW.Domain.Entities.Comment
 
-<div class="comment_outer">
+<div class="comment_outer" data-id="@Model.Id">
     <div class="comment_inner">
         <div class="comment_avatar">
             <img src="@Model.Author.Avatar" />
@@ -13,38 +13,29 @@
             <div class="message">@Model.Message</div>
             <div class="comment_footer">
                 <div>
-                    <a href="javascript:void(0)" onclick="">
+                    <a href="javascript:void(0)" onclick="OpenReplyEditor(@Model.Id)">
                         <i class="mdi mdi-reply"></i>
                         Reply
                     </a>
                 </div>
-                <div class="reactions">
 
-                    @foreach(var reaction in Model.Reactions)
-                    {
-                        <div class="reaction">
-                            <div class="emoji">@Html.Raw(@reaction.Emoji)</div>
-                            <div class="count">1</div>
-                        </div>
-                    }
-
-                </div>
-                <div class="reactions_buttons">
-                    <div class="reaction">+</div>
-                </div>
+                @Html.Partial("_Reactions")
             </div>
         </div>
     </div>
 
-    @if (Model.Comments != null)
-    {
-        <div class="comment_thread">
-            @Html.Partial("_CommentEditor", Model, new ViewDataDictionary(){ ["Hidden"] = true })
-
-            @foreach (var comment in Model.Comments)
+    <div class="comment_thread">
+        <div class="comment_reply_spoiler" data-id="@Model.Id">
+            @Html.Partial("_CommentEditor", null, new ViewDataDictionary
             {
-                @Html.Partial("_Comment", comment);
-            }
+                ["Type"] = "Comment",
+                ["TargetId"] = Model.Id
+            })
         </div>
-    }
+
+        @foreach (var comment in Model.Comments)
+        {
+            @Html.Partial("_Comment", comment);
+        }
+    </div>
 </div>
