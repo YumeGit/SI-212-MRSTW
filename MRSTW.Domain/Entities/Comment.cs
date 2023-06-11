@@ -4,11 +4,12 @@ using System.Collections.Generic;
 namespace MRSTW.Domain.Entities
 {
 	public interface IHasComments
-	{
-		List<Comment> Comments { get; }
+    {
+        int Id { get; set; }
+        List<Comment> Comments { get; }
 	}
 
-	public class Comment : IHasComments
+	public class Comment : IHasComments, IHasReactions
     {
 		public int Id { get; set; }
 		public User Author { get; set; }
@@ -17,5 +18,8 @@ namespace MRSTW.Domain.Entities
 
         // IHasComments
         public List<Comment> Comments { get; set; }
+
+        // IHasReactions
+        public List<Reaction> Reactions { get; set; }
     }
 }

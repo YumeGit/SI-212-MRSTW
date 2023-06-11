@@ -231,6 +231,7 @@ input {
     box-sizing: border-box;
     resize: none;
     border-radius: .5em;
+    width: 100%;
 }
 
 

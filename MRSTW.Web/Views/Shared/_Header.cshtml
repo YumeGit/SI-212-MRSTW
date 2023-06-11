@@ -13,15 +13,11 @@
         <div class="header_column">
             <div class="header_navigation">
                 <ul>
-                    <a href="@Url.Action("", "")">
-                        <li>Home</li>
-                    </a>
+                    <li>@Html.ActionLink("Home", "", "")</li>
 
-                    @if(Session.UserHasRole(MRSTW.Domain.Entities.UserRole.Admin))
+                    @if (Session.UserHasRole(MRSTW.Domain.Entities.UserRole.Admin))
                     {
-                        <a href="@Url.Action("", "Users")">
-                            <li>Admin</li>
-                        </a>
+                        <li>@Html.ActionLink("Admin", "", "Admin")</li>
                     }
                 </ul>
             </div>

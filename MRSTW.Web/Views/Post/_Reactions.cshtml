@@ -1,20 +1,82 @@
 ﻿@model MRSTW.Domain.Entities.IHasReactions
+@using MRSTW.Web.Extensions;
+
 @{ 
     var reactionService = new MRSTW.BusinessLogic.Service.ReactionService();
     reactionService.LoadReactions(Model);
+
+    var emojis = Model.Reactions.Select(x => x.Emoji).Distinct();
+    var localUser = Session.GetUser();
 }
 
 <div class="reactions">
 
-    @foreach (var reaction in Model.Reactions)
+    @foreach (var emoji in emojis)
     {
-        <div class="reaction">
-            <div class="emoji">@Html.Raw(@reaction.Emoji)</div>
-            <div class="count">1</div>
-        </div>
+        var reactions = Model.Reactions.FindAll(x => x.Emoji == emoji);
+        var count = reactions.Count();
+        var names = reactions.Take(2).Select(x =>
+        {
+            reactionService.LoadReference(x, y => y.Author);
+            return x.Author.Name;
+        });
+
+        var reactionLabel = string.Join(", ", names);
+        if (reactions.Count > 2) { reactionLabel += $" and {reactions.Count - 2} others"; }
+        reactionLabel += " added this reaction.";
+
+        var localUserReacted = localUser != null && reactions.Find(x => x.Author == localUser) != null;
+
+        using (@Html.BeginForm("ToggleReaction", "Post", FormMethod.Post))
+        {
+            @Html.Hidden("Type", Model.GetType().Name)
+            @Html.Hidden("TargetId", Model.Id)
+            @Html.Hidden("GoBackUrl", Request.Url.AbsoluteUri)
+            @Html.Hidden("Emoji", emoji)
+
+            <button class="reaction @(localUserReacted ? "selected" : "")" title="@reactionLabel">
+                <div class="emoji">@Html.Raw(@emoji)</div>
+                <div class="count">@count</div>
+            </button>
+        }
     }
 
     <div class="reactions_buttons">
-        <div class="reaction">+</div>
+        <div class="reaction" onclick="ShowReactionPicker(this)">+</div>
+
+        <script>
+            function ShowReactionPicker(button) {
+                var parent = button.parentElement;
+                var picker = parent.querySelector(".reaction_picker");
+                for (var a of document.querySelectorAll(".reaction_picker")) {
+                    if (a == picker) a.classList.add("visible");
+                    else a.classList.remove("visible");
+                }
+            }
+        </script>
+
+        <div class="reaction_picker">
+            @{
+                var available = new string[]
+                {
+                    "👍", "👎", "😎", "🤮", "<img src=\"https://www.icegif.com/wp-content/uploads/2022/09/icegif-279.gif\" />"
+            };
+
+                foreach (var avail in available)
+                {
+                    using (Html.BeginForm("ToggleReaction", "Post", FormMethod.Post))
+                    {
+                        @Html.Hidden("Type", Model.GetType().Name)
+                        @Html.Hidden("TargetId", Model.Id)
+                        @Html.Hidden("GoBackUrl", Request.Url.AbsoluteUri)
+                        @Html.Hidden("Emoji", avail)
+
+                        <button class="reaction">
+                            <div class="emoji">@Html.Raw(avail)</div>
+                        </button>
+                    }
+                }
+            }
+        </div>
     </div>
 </div>

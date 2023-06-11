@@ -32,18 +32,14 @@
                         </a>
                     </div>
 
-                    <!-- TODO: Reactions here -->
+                    @Html.Partial("_Reactions", comment)
                 </div>
             </div>
         </div>
 
         <div class="comment_thread">
             <div class="comment_reply_spoiler" data-id="@comment.Id">
-                @Html.Partial("_CommentEditor", null, new ViewDataDictionary
-                {
-                    ["Type"] = "Comment",
-                    ["TargetId"] = comment.Id
-                })
+                @Html.Partial("_CommentEditor", comment)
             </div>
 
             @Html.Partial("_Comments", comment)

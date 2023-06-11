@@ -3,7 +3,7 @@
 <a href="@Url.Action("Details", "Post", new { id = Model.Id })" class="display_contents">
     <div class="post secondary card">
         <div class="thumbnail">
-            <div class="category">History</div>
+            <div class="category">@Model.CatergoryName</div>
             <img src="@Model.Thumbnail" />
         </div>
         <div class="info">

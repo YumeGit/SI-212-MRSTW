@@ -1,7 +1,9 @@
 ﻿using MRSTW.BusinessLogic.Database;
 using MRSTW.Domain.Entities;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -64,9 +66,21 @@ namespace MRSTW.BusinessLogic.Service
             return Success(DbContext.Set<TModel>().Where(predicate).ToArray());
         }
 
+        public ServiceResponse<TModel> Attach(TModel model)
+        {
+            DbContext.Set<TModel>().Attach(model);
+            return Success(model);
+        }
+
         public ServiceResponse<TModel> Add(TModel model)
         {
             return ChangeState(model, EntityState.Added);
+        }
+
+        public ServiceResponse<TModel> AddOrUpdate(TModel model)
+        {
+            DbContext.Set<TModel>().AddOrUpdate(model);
+            return Success(model);
         }
 
         public ServiceResponse<TModel> Delete(TModel model)
@@ -92,10 +106,22 @@ namespace MRSTW.BusinessLogic.Service
             DbContext.Entry(model).Reference(navigationProperty).Load();
         }
 
+        public void LoadReference<U>(TModel model, Expression<Func<TModel, U>> predicate) where U : class
+        {
+            DbContext.Set<TModel>().Attach(model);
+            DbContext.Entry(model).Reference(predicate).Load();
+        }
+
         public void LoadCollection(TModel model, string navigationProperty)
         {
             DbContext.Set<TModel>().Attach(model);
             DbContext.Entry(model).Collection(navigationProperty).Load();
+        }
+
+        public void LoadCollection<U>(TModel model, Expression<Func<TModel, ICollection<U>>> predicate) where U : class
+        {
+            DbContext.Set<TModel>().Attach(model);
+            DbContext.Entry(model).Collection(predicate).Load();
         }
     }
 }

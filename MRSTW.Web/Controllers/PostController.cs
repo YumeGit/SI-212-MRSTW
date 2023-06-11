@@ -1,6 +1,7 @@
 ﻿using MRSTW.BusinessLogic.Service;
 using MRSTW.Controllers;
 using MRSTW.Domain.Entities;
+using MRSTW.Filters;
 using MRSTW.Web.Extensions;
 using MRSTW.Web.Models;
 using System.Web.Mvc;
@@ -38,6 +39,9 @@ namespace MRSTW.Web.Controllers
             return View(post);
 		}
 
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[RequireLogin]
 		public ActionResult PostComment(CommentForm form)
 		{
 			var commentService = new CommentService();
@@ -69,12 +73,62 @@ namespace MRSTW.Web.Controllers
 			if (target == null)
 				return HttpNoPermission();
 
-			var author = Session.GetUser();
-			var message = form.Message;
-            var comment = new Comment { Author = author, Message = message };
+            var comment = new Comment { Author = Session.GetUser(), Message = form.Message };
 			target.Comments.Add(comment);
 			commentService.Add(comment);
 			return Redirect(form.GoBackUrl);
+		}
+
+		[RequireLogin]
+		[ValidateInput(false)]
+		public ActionResult ToggleReaction(ReactionForm form)
+        {
+            var reactionService = new ReactionService();
+            IHasReactions target = null;
+            switch (form.Type)
+            {
+                case "Comment":
+                    using (var commentService = new CommentService())
+                    {
+                        var comResp = commentService.Get(form.TargetId);
+                        if (!comResp.Success)
+                            return HttpNoPermission();
+
+                        target = comResp.Entry;
+                        commentService.LoadCollection(comResp.Entry, "Reactions");
+                    }
+                    break;
+
+                case "Post":
+                    using (var postService = new PostService())
+                    {
+                        var postResp = postService.Get(form.TargetId);
+                        if (!postResp.Success)
+                            return HttpNoPermission();
+
+                        target = postResp.Entry;
+                        postService.LoadCollection(postResp.Entry, "Reactions");
+                    }
+                    break;
+            }
+
+			var author = Session.GetUser();
+			var existingReaction = target.Reactions.Find(x => x.Author == author && x.Emoji == form.Emoji);
+			if(existingReaction != null)
+			{
+				// Delete 
+				target.Reactions.Remove(existingReaction);
+				reactionService.Delete(existingReaction);
+			}
+			else
+            {
+				// Create
+                var reaction = new Reaction { Author = Session.GetUser(), Emoji = form.Emoji };
+                target.Reactions.Add(reaction);
+                reactionService.Add(reaction);
+            }
+
+            return Redirect(form.GoBackUrl);
 		}
 	}
 }

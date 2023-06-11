@@ -5,6 +5,7 @@ namespace MRSTW.Domain.Entities
 {
     public interface IHasReactions
     {
+        int Id { get; set; }
         List<Reaction> Reactions { get; }
     }
 

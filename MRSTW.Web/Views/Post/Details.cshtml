@@ -34,12 +34,7 @@
                 </div>
 
                 <div class="card post_comments">
-                    @Html.Partial("_CommentEditor", null, new ViewDataDictionary
-                    {
-                        ["Type"] = "Post",
-                        ["TargetId"] = Model.Id
-                    })
-
+                    @Html.Partial("_CommentEditor", Model)
                     @Html.Partial("_Comments", Model)
                 </div>
             </div>
@@ -64,23 +59,6 @@
                             <div>Views: <b>@Model.Views</b></div>
                             <div>Comments: <b>@Model.Comments.Count</b></div>
                         </div>
-
-                        @if (Session.UserHasRole(MRSTW.Domain.Entities.UserRole.Admin))
-                        {
-                            <div class="post_manage_section">
-                                <a href="@Url.Action("Edit", new { Id = Model.Id })">
-                                    <div class="button secondary">
-                                        <i class="mdi mdi-pencil"></i> Edit
-                                    </div>
-                                </a>
-                                <a href="@Url.Action("Delete", new { Id = Model.Id })">
-                                    <div class="button secondary">
-                                        <i class="mdi mdi-delete"></i> Delete
-                                    </div>
-                                </a>
-                            </div>
-                        }
-
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 ﻿@using MRSTW.Web.Extensions
-@model MRSTW.Web.Models.CommentForm
+@model MRSTW.Domain.Entities.IHasComments
 
 @{
     var sessionUser = Session.GetUser();
@@ -7,8 +7,8 @@
 
 @using (Html.BeginForm("PostComment", "Post", FormMethod.Post))
 {
-    @Html.Hidden("Type", ViewData["Type"])
-    @Html.Hidden("TargetId", ViewData["TargetId"])
+    @Html.Hidden("Type", Model.GetType().Name)
+    @Html.Hidden("TargetId", Model.Id)
     @Html.Hidden("GoBackUrl", Request.Url.AbsoluteUri)
     @Html.AntiForgeryToken()
 
@@ -19,7 +19,7 @@
                 <img src="@sessionUser.Avatar" />
             </div>
             <div class="comment_content">
-                @Html.TextAreaFor(x => x.Message, new { placeholder = "Leave a comment..." })
+                @Html.TextArea("Message", new { placeholder = "Leave a comment..." })
             </div>
             <div class="comment_post_button">
                 <button class="button primary">
