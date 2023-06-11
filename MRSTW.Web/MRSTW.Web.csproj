@@ -116,16 +116,15 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
-    <Compile Include="Controllers\BaseBlogController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Filters\RequireUserRoleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryView.cs" />
     <Compile Include="Models\CommentForm.cs" />
     <Compile Include="Models\HomePageView.cs" />
     <Compile Include="Models\RegisterForm.cs" />
@@ -144,18 +143,18 @@
     <Content Include="Views\Post\Delete.cshtml" />
     <Content Include="Views\Post\Details.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
-    <Content Include="Views\Post\_Comment.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Home\_PostCard.cshtml" />
+    <Content Include="Views\Shared\_PostCard.cshtml" />
     <Content Include="Views\Home\_PostPrimary.cshtml" />
     <Content Include="Views\Home\_PostSecondary.cshtml" />
-    <Content Include="Views\Home\_Category.cshtml" />
     <Content Include="Views\Post\_CommentEditor.cshtml" />
     <Content Include="Views\Post\_Reactions.cshtml" />
+    <Content Include="Views\Post\Category.cshtml" />
+    <Content Include="Views\Post\_Comments.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

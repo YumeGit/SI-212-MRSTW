@@ -5,29 +5,35 @@
     <link rel="stylesheet" href="~/Content/styles/Home.css" />
 }
 
-<div class="home_layout">
-    <div class="home_primary_post_container">
-        @Html.Partial("_PostPrimary", Model.Posts.FirstOrDefault())
+@if (Model.Posts.Length > 0)
+{
+    <div class="home_layout">
+        <div class="home_primary_post_container">
+            @Html.Partial("_PostPrimary", Model.Posts.FirstOrDefault())
+        </div>
+
+        <div class="home_secondary_post_container">
+
+            @Html.Partial("_PostSecondary", Model.Posts.Skip(1).FirstOrDefault())
+            @Html.Partial("_PostSecondary", Model.Posts.Skip(2).FirstOrDefault())
+
+        </div>
     </div>
 
-    <div class="home_secondary_post_container">
-
-        @Html.Partial("_PostSecondary", Model.Posts.Skip(1).FirstOrDefault())
-        @Html.Partial("_PostSecondary", Model.Posts.Skip(2).FirstOrDefault())
-
+    <div class="categories">
+        @{
+            var categories = new string[] { "Anime", "IT", "Nature", "Games", "History" };
+            foreach (var category in categories)
+            {
+                <a href="@Url.Action("Category", "Post", new { id = category })" class="category">@category</a>
+            }
+        }
     </div>
-</div>
 
-<div class="categories">
-    @foreach (var category in Model.Categories)
-    {
-        @Html.Partial("_Category", category)
-    }
-</div>
-
-<div class="posts_grid">
-    @foreach (var post in Model.Posts.Skip(3))
-    {
-        @Html.Partial("_PostCard", post)
-    }
-</div>
+    <div class="posts_grid">
+        @foreach (var post in Model.Posts.Skip(3))
+        {
+            @Html.Partial("_PostCard", post)
+        }
+    </div>
+}

@@ -2,8 +2,9 @@
 
 namespace MRSTW.Web.Models
 {
-    public class HomePageView
+    public class CategoryView
     {
+        public string Name { get; set; }
         public Post[] Posts { get; set; }
     }
 }

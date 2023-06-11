@@ -1,114 +1,80 @@
 ﻿using MRSTW.BusinessLogic.Service;
 using MRSTW.Controllers;
 using MRSTW.Domain.Entities;
-using MRSTW.Filters;
+using MRSTW.Web.Extensions;
 using MRSTW.Web.Models;
 using System.Web.Mvc;
 
 namespace MRSTW.Web.Controllers
 {
-    public class PostController : BaseBlogController
+	public class PostController : BaseController
 	{
 		PostService Posts = new PostService();
 
-		public ActionResult Details(int? id)
+		public ActionResult Category(string id) 
 		{
-			if (id == null)
-				return HttpNotFound();
-
-			// Find the post entry in the database, also load the author entry,
-			// and all the comments.
-			var postResponse = Posts.GetById(id.Value);
-			if (!postResponse.Success)
+			var postsResp = Posts.FindAll(x => x.CatergoryName == id);
+			if (!postsResp.Success)
 				return HttpNoPermission();
 
-			var post = postResponse.Entry;
-			if (post == null)
-				return HttpNotFound();
-
-			Posts.IncrementViewCount(post);
-
-			// Show the full story of the post.
-			return View(post);
-		}
-
-		[RequireUserRole(UserRole.Admin)]
-		public ActionResult Edit(int? id)
-		{
-			if (id == null)
-				return HttpNotFound();
-
-			var post = Posts.GetById(id.Value);
-			if (!post.Success)
-				return HttpNoPermission();
-
-			if (post == null)
-				return HttpNotFound();
-
-			return View(post.Entry);
-		}
-
-		[HttpPost]
-		[RequireUserRole(UserRole.Admin)]
-		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Name,Story")] Post post)
-		{
-			if (ModelState.IsValid)
+			return View(new CategoryView
 			{
-				var r = Posts.Edit(post);
-				if (r.Success)
-					return RedirectToAction("Details");
-
-				return HttpNoPermission();
-			}
-
-			return View(post);
+				Name = id,
+				Posts = postsResp.Entry
+			});
 		}
 
-		[RequireUserRole(UserRole.Admin)]
-		public ActionResult Delete(int? id)
+		public ActionResult Details(int id)
 		{
-			if (id == null)
-				return HttpNotFound();
+			var postResp = Posts.Get(id);
+            if (!postResp.Success)
+                return HttpNoPermission();
 
-			var post = Posts.GetById(id.Value);
-			if (!post.Success)
-				return HttpNoPermission();
-
+			var post = postResp.Entry;
 			if (post == null)
 				return HttpNotFound();
 
-			return View(post.Entry);
+			Posts.LoadReference(post, "Author");
+            return View(post);
 		}
 
-		[HttpPost]
-		[RequireUserRole(UserRole.Admin)]
-		[ActionName("Delete")]
-		public ActionResult DeleteConfirmed(int? id)
-		{
-			if (id == null)
-				return HttpNotFound();
-
-			var resp = Posts.GetById(id.Value);
-			if(!resp.Success)
-				return HttpNoPermission();
-
-			var post = resp.Entry;
-			if (post == null)
-				return HttpNotFound();
-
-			var delResp = Posts.Delete(post);
-			if(!delResp.Success)
-				return HttpNoPermission();
-
-			return Redirect("/");
-		}
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public ActionResult PostComment(CommentForm form)
-        {
-			return View();
-        }
+		{
+			var commentService = new CommentService();
+            IHasComments target = null;
+			switch(form.Type)
+			{
+				case "Comment":
+                    var comResp = commentService.Get(form.TargetId);
+                    if (!comResp.Success)
+                        return HttpNoPermission();
+
+                    target = comResp.Entry;
+					commentService.LoadCollection(comResp.Entry, "Comments");
+                    break;
+
+                case "Post":
+					using (var postService = new PostService())
+					{
+						var postResp = postService.Get(form.TargetId);
+						if (!postResp.Success)
+							return HttpNoPermission();
+
+						target = postResp.Entry;
+                        postService.LoadCollection(postResp.Entry, "Comments");
+                    }
+					break;
+            }
+
+			if (target == null)
+				return HttpNoPermission();
+
+			var author = Session.GetUser();
+			var message = form.Message;
+            var comment = new Comment { Author = author, Message = message };
+			target.Comments.Add(comment);
+			commentService.Add(comment);
+			return Redirect(form.GoBackUrl);
+		}
 	}
 }

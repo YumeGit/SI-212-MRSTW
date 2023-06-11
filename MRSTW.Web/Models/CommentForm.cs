@@ -10,5 +10,6 @@ namespace MRSTW.Web.Models
 		[Required]
 		[MaxLength(100)]
 		public string Message { get; set; }
+		public string GoBackUrl { get; set; }
 	}
 }

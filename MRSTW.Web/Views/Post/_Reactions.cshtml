@@ -1,4 +1,8 @@
-﻿@model MRSTW.Domain.Interfaces.IHasReactions
+﻿@model MRSTW.Domain.Entities.IHasReactions
+@{ 
+    var reactionService = new MRSTW.BusinessLogic.Service.ReactionService();
+    reactionService.LoadReactions(Model);
+}
 
 <div class="reactions">
 

@@ -9,6 +9,7 @@
 {
     @Html.Hidden("Type", ViewData["Type"])
     @Html.Hidden("TargetId", ViewData["TargetId"])
+    @Html.Hidden("GoBackUrl", Request.Url.AbsoluteUri)
     @Html.AntiForgeryToken()
 
     <div class="comment_outer post_leave_a_comment">

@@ -6,28 +6,23 @@ using System.Web.Mvc;
 
 namespace MRSTW.Web
 {
-	public class HomeController : BaseBlogController
+	public class HomeController : BaseController
 	{
 		public ActionResult Index()
 		{
-			var posts = new PostService();
-			var categories = new CategoryService();
-
-            var postsResp = posts.GetAll();
-            if (!postsResp.Success)
-                return HttpNoPermission();
-
-            var categoryResp = categories.GetAll();
-            if (!categoryResp.Success)
-                return HttpNoPermission();
-
-            var vm = new HomePageView
+			using(var postsService = new PostService())
 			{
-				Posts = postsResp.Entries.ToList(),
-				Categories = categoryResp.Entries.ToList()
-            };
+				var postsResp = postsService.GetAll();
+                if (!postsResp.Success)
+                    return HttpNoPermission();
 
-			return View(vm);
+                var vm = new HomePageView
+                {
+                    Posts = postsResp.Entry
+                };
+
+				return View(vm);
+            }
 		}
 	}
 }

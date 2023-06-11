@@ -1,5 +1,10 @@
 ﻿@model MRSTW.Domain.Entities.Post
 
+@{
+    var service = new MRSTW.BusinessLogic.Service.PostService();
+    service.LoadReference(Model, "Author");
+}
+
 <a href="@Url.Action("Details", "Post", new { id = Model.Id })" class="display_contents">
     <div class="post card">
         <div class="thumbnail">

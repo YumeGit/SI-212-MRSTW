@@ -1,10 +1,11 @@
 ﻿using MRSTW.BusinessLogic.Service;
+using MRSTW.Domain.Entities;
 using MRSTW.Web.Extensions;
 using System.Web.Mvc;
 
 namespace MRSTW.Controllers
 {
-	public abstract class BaseBlogController : Controller
+	public abstract class BaseController : Controller
 	{
 		public const string SESSION_COOKIE_NAME = "SessionToken";
 
@@ -15,8 +16,6 @@ namespace MRSTW.Controllers
 			var sessionCookie = Request.Cookies[SESSION_COOKIE_NAME];
 			if (sessionCookie == null)
 				return;
-
-			var userTest = Session.GetUser();
 
 			using (var sessionService = new SessionService())
 			{
@@ -29,12 +28,19 @@ namespace MRSTW.Controllers
 				if (session == null)
 					return;
 
-				var user = session.User;
-				if (user == null)
-					return;
+				using (var userService = new UserService())
+				{
+                    var userResp = userService.Get(session.UserId);
+                    if (!userResp.Success)
+						return;
 
-				Session.SetUser(user);
-				ViewBag.SessionUser = user;
+                    var user = userResp.Entry;
+                    if (user == null)
+                        return;
+
+                    Session.SetUser(user);
+                    ViewBag.SessionUser = user;
+                }
 			}
 
 			base.OnActionExecuting(filterContext);

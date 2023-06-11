@@ -1,0 +1,14 @@
+﻿@model MRSTW.Web.Models.CategoryView
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<h2>@Model.Name</h2>
+
+<div class="posts_grid">
+    @foreach (var post in Model.Posts)
+    {
+        @Html.Partial("_PostCard", post)
+    }
+</div>

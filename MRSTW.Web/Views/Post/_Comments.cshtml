@@ -1,0 +1,53 @@
+﻿@model MRSTW.Domain.Entities.IHasComments
+@{
+    var commentService = new MRSTW.BusinessLogic.Service.CommentService();
+    commentService.LoadComments(Model);
+}
+
+@foreach(var comment in Model.Comments)
+{
+    // Load the author of the comment.
+    commentService.LoadReference(comment, "Author");
+
+    <div class="comment_outer" data-id="@comment.Id">
+        <div class="comment_inner">
+
+            <div class="comment_avatar">
+                <img src="@comment.Author.Avatar" />
+            </div>
+
+            <div class="comment_content">
+                <div class="comment_author">
+                    <div class="comment_author_name">@comment.Author.Name</div>
+                    <div class="comment_author_time">@comment.Created.ToShortDateString()</div>
+                </div>
+
+                <div class="message">@comment.Message</div>
+
+                <div class="comment_footer">
+                    <div>
+                        <a href="javascript:void(0)" onclick="OpenReplyEditor(@comment.Id)">
+                            <i class="mdi mdi-reply"></i>
+                            Reply
+                        </a>
+                    </div>
+
+                    <!-- TODO: Reactions here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_thread">
+            <div class="comment_reply_spoiler" data-id="@comment.Id">
+                @Html.Partial("_CommentEditor", null, new ViewDataDictionary
+                {
+                    ["Type"] = "Comment",
+                    ["TargetId"] = comment.Id
+                })
+            </div>
+
+            @Html.Partial("_Comments", comment)
+        </div>
+    </div>
+
+}
