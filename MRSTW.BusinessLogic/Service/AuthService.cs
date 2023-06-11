@@ -1,5 +1,4 @@
-﻿using MRSTW.BusinessLogic.Database;
-using MRSTW.Domain.Entities;
+﻿using MRSTW.Domain.Entities;
 using MRSTW.Helpers;
 using System;
 using System.Data.Entity;
@@ -12,74 +11,58 @@ namespace MRSTW.BusinessLogic.Service
         public struct LoginData
         {
             public string Email { get; set; }
-            public string Password { get; set; }    
+            public string Password { get; set; }
             public string IpAddress { get; set; }
             public DateTime Time { get; set; }
-		}
+        }
 
-		public EntryServiceResponse<Session> Login(LoginData data)
-		{
-			var passHash = AuthHelper.GeneratePasswordHash(data.Password);
+        public ServiceResponse<Session> Login(LoginData data)
+        {
+            var passHash = AuthHelper.GeneratePasswordHash(data.Password);
 
-			var user = DbContext.Users.FirstOrDefault(x => x.Email == data.Email && x.PasswordHash == passHash);
-			if (user == null)
-				return Failure<EntryServiceResponse<Session>>("User with this pair not found.");
+            var user = DbContext.Users.FirstOrDefault(x => x.Email == data.Email && x.PasswordHash == passHash);
+            if (user == null)
+                return Failure<Session>("User with this pair not found");
 
-			user.LastIpAddress = data.IpAddress;
-			user.LastLoginTime = data.Time;
-			DbContext.Entry(user).State = EntityState.Modified;
-			DbContext.SaveChanges();
+            user.LastIpAddress = data.IpAddress;
+            user.LastLoginTime = data.Time;
+            DbContext.Entry(user).State = EntityState.Modified;
 
-			//
-			// Create session and store token in Cookie.
-			//
+            var session = new Session()
+            {
+                Token = AuthHelper.GenerateSessionToken(user.Name),
+                UserId = user.Id
+            };
 
-			using (var sessionService = new SessionService())
-			{
-				var session = new Session
-				{
-					Token = AuthHelper.GenerateSessionToken(user.Name),
-					User = user
-				};
+            DbContext.Sessions.Add(session);
+            DbContext.SaveChanges();
+            return Success(session);
+        }
 
-				var crResp = sessionService.Create(session);
-				if(!crResp.Success)
-					return Failure<EntryServiceResponse<Session>>(crResp.Message);
+        public struct RegisterData
+        {
+            public string Name { get; set; }
+            public string Email { get; set; }
+            public string Password { get; set; }
+            public string IpAddress { get; set; }
+            public DateTime Time { get; set; }
+        }
 
-				return Entry(session);
-			}
-		}
+        public ServiceResponse<User> Register(RegisterData data)
+        {
+            if (DbContext.Users.FirstOrDefault(x => x.Email == data.Email) != null)
+                return Failure<User>("Account with this Email already exists.");
 
-		public struct RegisterData
-		{
-			public string Name { get; set; }
-			public string Email { get; set; }
-			public string Password { get; set; }
-			public string IpAddress { get; set; }
-			public DateTime Time { get; set; }
-		}
+            var user = new User
+            {
+                Name = data.Name,
+                Email = data.Email,
+                PasswordHash = AuthHelper.GeneratePasswordHash(data.Password),
+            };
 
-		public ServiceResponse Register(RegisterData data)
-		{
-			using (var uService = new UserService())
-			{
-				if (uService.GetByEmail(data.Email).Entry != null)
-					return Failure("Account with this Email already exists.");
-			}
-
-			var user = new User
-			{
-				Name = data.Name,
-				Email = data.Email,
-				PasswordHash = AuthHelper.GeneratePasswordHash(data.Password),
-				LastIpAddress = data.IpAddress,
-				LastLoginTime = data.Time,
-				Role = UserRole.User
-			};
-
-			DbContext.Users.Add(user);
-			DbContext.SaveChanges();
-			return Success();
-		}
-	}
+            DbContext.Users.Add(user);
+            DbContext.SaveChanges();
+            return Success(user);
+        }
+    }
 }

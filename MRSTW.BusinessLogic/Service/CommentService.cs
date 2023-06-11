@@ -1,41 +1,23 @@
 ﻿using MRSTW.Domain.Entities;
 using System;
-using System.Data.Entity;
-using System.Linq;
 
 namespace MRSTW.BusinessLogic.Service
 {
-    public class CommentService : Service
+    public class CommentService : ModelService<Comment>
     {
-        public EntryServiceResponse<Comment> GetById(int id)
+        public ServiceResponse<IHasComments> LoadComments(IHasComments comment)
         {
-            var comment = DbContext.Comments
-                .Include(x => x.Author)
-                .First(x => x.Id == id);
-
-            return Entry(comment);
+            var type = comment.GetType();
+            try
+            {
+                DbContext.Set(type).Attach(comment);
+                DbContext.Entry(comment).Collection(x => x.Comments).Load();
+                return Success(comment);
+            }
+            catch(Exception e)
+            {
+                return Failure<IHasComments>(e.Message);
+            }
         }
-
-        public EntriesServiceResponse<Comment> GetAllFromPost(Post post)
-        {
-            DbContext.Posts.Attach(post); 
-
-            var comments = DbContext.Entry(post)
-                .Collection(x => x.Comments).Query()
-                .Include(x => x.Reactions.Select(y => y.Author))
-                .Include(x => x.Author)
-                .OrderByDescending(x => x.Created)
-                .ToList();
-
-            return Entries(comments);
-        }
-
-        public EntryServiceResponse<Comment> AddToPost(Post post, Comment comment)
-        {
-            post.Comments.Add(comment);
-            DbContext.SaveChanges();
-
-            return Entry(comment);
-		}
 	}
 }
