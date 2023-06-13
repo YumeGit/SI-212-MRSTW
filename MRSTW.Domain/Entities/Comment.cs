@@ -13,7 +13,7 @@ namespace MRSTW.Domain.Entities
     {
 		public int Id { get; set; }
 		public User Author { get; set; }
-		public string Message { get; set; }
+        public string Message { get; set; }
 		public DateTime Created { get; set; } = DateTime.Now;
 
         // IHasComments

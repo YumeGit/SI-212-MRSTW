@@ -1,7 +1,6 @@
 ﻿using MRSTW.BusinessLogic.Service;
 using MRSTW.Controllers;
 using MRSTW.Web.Models;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace MRSTW.Web
@@ -12,7 +11,7 @@ namespace MRSTW.Web
 		{
 			using(var postsService = new PostService())
 			{
-				var postsResp = postsService.GetAll();
+				var postsResp = postsService.GetAllOrdered(x => x.Created);
                 if (!postsResp.Success)
                     return HttpNoPermission();
 

@@ -1,6 +1,7 @@
 ﻿using MRSTW.BusinessLogic.Service;
 using MRSTW.Domain.Entities;
 using MRSTW.Filters;
+using MRSTW.Web.Extensions;
 using System.Web.Mvc;
 
 namespace MRSTW.Controllers
@@ -102,7 +103,7 @@ namespace MRSTW.Controllers
                         return HttpNoPermission();
 
                     var product = prodResp.Entry;
-                    var deleteResp = postService.Delete(product);
+                    var deleteResp = postService.Remove(product);
                     if (!deleteResp.Success)
                         return HttpNoPermission();
                 }
@@ -127,6 +128,7 @@ namespace MRSTW.Controllers
             {
                 using (var postService = new PostService())
                 {
+                    product.Author = Session.GetUser();
                     var editResp = postService.Add(product);
                     if (!editResp.Success)
                         return HttpNoPermission();
@@ -226,7 +228,7 @@ namespace MRSTW.Controllers
                         return HttpNoPermission();
 
                     var product = prodResp.Entry;
-                    var deleteResp = userService.Delete(product);
+                    var deleteResp = userService.Remove(product);
                     if (!deleteResp.Success)
                         return HttpNoPermission();
                 }

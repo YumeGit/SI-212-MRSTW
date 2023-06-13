@@ -14,7 +14,7 @@
 
         <div class="content">
             <div class="title">@Model.Name</div>
-            <div class="meta">By @Model.Author.Name from @Model.Created.ToShortDateString()</div>
+            <div class="meta">By @(Model.Author?.Name ?? "<???>") from @Model.Created.ToShortDateString()</div>
             <div class="story">@string.Join(" ", @Model.Story.Split(' ').Take(10))...</div>
         </div>
     </div>

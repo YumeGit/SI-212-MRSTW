@@ -12,20 +12,44 @@ namespace MRSTW.Web.Controllers
 	{
 		PostService Posts = new PostService();
 
-		public ActionResult Category(string id) 
-		{
-			var postsResp = Posts.FindAll(x => x.CatergoryName == id);
-			if (!postsResp.Success)
-				return HttpNoPermission();
+        public new ActionResult User(int id)
+        {
+            using (var userService = new UserService())
+            {
+                var userResp = userService.Get(id);
+                if (!userResp.Success)
+                    return HttpNoPermission();
 
-			return View(new CategoryView
-			{
-				Name = id,
-				Posts = postsResp.Entry
-			});
-		}
+                var user = userResp.Entry;
+                if (user == null)
+                    return HttpNotFound();
 
-		public ActionResult Details(int id)
+                var postsResp = Posts.FindAll(x => x.Author == user);
+                if (!postsResp.Success)
+                    return HttpNoPermission();
+
+                return View("Category", new CategoryView
+                {
+                    Name = user.Name,
+                    Posts = postsResp.Entry
+                });
+            }
+        }
+
+        public ActionResult Category(string id)
+        {
+            var postsResp = Posts.FindAll(x => x.CatergoryName == id);
+            if (!postsResp.Success)
+                return HttpNoPermission();
+
+            return View(new CategoryView
+            {
+                Name = id,
+                Posts = postsResp.Entry
+            });
+        }
+
+        public ActionResult Details(int id)
 		{
 			var postResp = Posts.Get(id);
             if (!postResp.Success)
@@ -118,7 +142,7 @@ namespace MRSTW.Web.Controllers
 			{
 				// Delete 
 				target.Reactions.Remove(existingReaction);
-				reactionService.Delete(existingReaction);
+				reactionService.Remove(existingReaction);
 			}
 			else
             {

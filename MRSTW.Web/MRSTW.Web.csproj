@@ -145,8 +145,8 @@
     <Content Include="Views\Post\Comments.cshtml" />
     <Content Include="Views\Post\Details.cshtml" />
     <Content Include="Views\Shared\_PostCard.cshtml" />
-    <Content Include="Views\Home\_PostPrimary.cshtml" />
-    <Content Include="Views\Home\_PostSecondary.cshtml" />
+    <Content Include="Views\Shared\_PostPrimary.cshtml" />
+    <Content Include="Views\Shared\_PostSecondary.cshtml" />
     <Content Include="Views\Post\_CommentEditor.cshtml" />
     <Content Include="Views\Post\_Reactions.cshtml" />
     <Content Include="Views\Post\Category.cshtml" />
