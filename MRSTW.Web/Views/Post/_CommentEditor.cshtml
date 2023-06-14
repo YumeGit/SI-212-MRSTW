@@ -19,7 +19,7 @@
                 <img src="@sessionUser.Avatar" />
             </div>
             <div class="comment_content">
-                @Html.TextArea("Message", new { placeholder = "Leave a comment..." })
+                <textarea name="Message" placeholder="Leave a comment..."></textarea>
             </div>
             <div class="comment_post_button">
                 <button class="button primary">
