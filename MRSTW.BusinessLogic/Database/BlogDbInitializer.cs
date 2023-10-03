@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace MRSTW.BusinessLogic.Database
 {
-    public class BlogDbInitializer : DropCreateDatabaseAlways<BlogDbContext>
+    public class BlogDbInitializer : DropCreateDatabaseIfModelChanges<BlogDbContext>
 	{
 		protected override void Seed(BlogDbContext context)
 		{
